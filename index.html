@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rethink — Think Before You Tap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0a0f1e;
+      --navy2: #111827;
+      --blue: #4f8ef7;
+      --blue-light: #7aabff;
+      --blue-dim: rgba(79,142,247,0.12);
+      --green: #22c55e;
+      --orange: #f59e0b;
+      --red: #ef4444;
+      --white: #ffffff;
+      --gray: #94a3b8;
+      --gray2: #1e293b;
+      --gray3: #334155;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--blue-light), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      color: var(--gray); font-size: 14px; font-weight: 500;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--blue); color: #fff; border: none;
+      padding: 10px 24px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 120px 48px 80px;
+      gap: 80px;
+    }
+    .hero-text { max-width: 520px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue-dim); border: 1px solid rgba(79,142,247,0.3);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: 12px; font-weight: 600; color: var(--blue-light);
+      margin-bottom: 28px; letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--blue); border-radius: 50%; }
+    h1 {
+      font-size: clamp(42px, 5vw, 68px);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+    h1 span { background: linear-gradient(135deg, var(--blue-light), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub {
+      font-size: 18px; line-height: 1.65; color: var(--gray);
+      margin-bottom: 40px; font-weight: 400;
+    }
+    .hero-actions { display: flex; gap: 16px; align-items: center; }
+    .btn-primary {
+      background: var(--blue); color: #fff; border: none;
+      padding: 16px 32px; border-radius: 12px;
+      font-size: 16px; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; letter-spacing: -0.2px;
+    }
+    .btn-primary:hover { background: var(--blue-light); transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: var(--gray);
+      border: 1px solid var(--gray3); padding: 16px 28px;
+      border-radius: 12px; font-size: 15px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-ghost:hover { color: var(--white); border-color: var(--white); }
+
+    /* ── PHONE MOCKUP ── */
+    .phone-wrap { position: relative; flex-shrink: 0; }
+    .phone {
+      width: 280px; height: 560px;
+      background: #1a1f35;
+      border-radius: 40px;
+      border: 3px solid rgba(255,255,255,0.12);
+      position: relative; overflow: hidden;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .phone::before {
+      content: '';
+      position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+      width: 80px; height: 6px;
+      background: rgba(255,255,255,0.15); border-radius: 100px; z-index: 10;
+    }
+
+    /* Phone screens */
+    .screen {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      opacity: 0; transition: opacity 0.6s ease;
+    }
+    .screen.active { opacity: 1; }
+
+    /* Screen 1: Shopping app */
+    .screen-shop {
+      background: #f8fafc;
+      padding: 48px 20px 24px;
+    }
+    .shop-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .shop-title { font-size: 14px; font-weight: 700; color: #1e293b; }
+    .shop-cart { font-size: 18px; }
+    .shop-product {
+      background: white; border-radius: 16px;
+      padding: 16px; margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .product-img {
+      width: 100%; height: 120px; background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+      border-radius: 10px; margin-bottom: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+    }
+    .product-name { font-size: 13px; font-weight: 700; color: #0f172a; }
+    .product-price { font-size: 18px; font-weight: 800; color: #4f8ef7; margin-top: 4px; }
+    .product-sub { font-size: 10px; color: #94a3b8; margin-top: 2px; }
+    .buy-btn {
+      width: 100%; background: #4f8ef7; color: white;
+      border: none; padding: 14px; border-radius: 12px;
+      font-size: 14px; font-weight: 700; cursor: pointer;
+      animation: pulse-btn 2s ease infinite;
+    }
+    @keyframes pulse-btn {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(79,142,247,0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(79,142,247,0); }
+    }
+
+    /* Screen 2: Rethink overlay */
+    .screen-rethink {
+      background: linear-gradient(180deg, #0a0f1e 0%, #0f1729 100%);
+      padding: 48px 20px 24px;
+      align-items: center; text-align: center;
+    }
+    .rethink-logo-sm {
+      font-size: 13px; font-weight: 800; color: #4f8ef7;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;
+    }
+    .rethink-icon { font-size: 40px; margin-bottom: 12px; }
+    .rethink-title { font-size: 16px; font-weight: 700; color: white; margin-bottom: 6px; }
+    .rethink-sub { font-size: 11px; color: #64748b; margin-bottom: 20px; }
+
+    /* Countdown ring */
+    .countdown-wrap { position: relative; width: 100px; height: 100px; margin: 0 auto 20px; }
+    .countdown-svg { transform: rotate(-90deg); }
+    .countdown-track { fill: none; stroke: #1e293b; stroke-width: 6; }
+    .countdown-prog {
+      fill: none; stroke: #4f8ef7; stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 251.2;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+    .countdown-text {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; font-weight: 800; color: white;
+    }
+
+    /* AI insight card */
+    .ai-card {
+      background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.25);
+      border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; text-align: left; width: 100%;
+    }
+    .ai-label { font-size: 9px; font-weight: 700; color: #4f8ef7; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+    .ai-text { font-size: 11px; color: #cbd5e1; line-height: 1.5; }
+    .ai-highlight { color: white; font-weight: 700; }
+
+    /* Spending bar */
+    .spend-bar-wrap { width: 100%; margin-bottom: 16px; }
+    .spend-bar-label { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .spend-bar-label span { font-size: 9px; color: #64748b; }
+    .spend-bar-label strong { font-size: 9px; color: #f59e0b; }
+    .spend-bar-track { height: 6px; background: #1e293b; border-radius: 100px; overflow: hidden; }
+    .spend-bar-fill { height: 100%; background: linear-gradient(90deg, #4f8ef7, #f59e0b); border-radius: 100px; }
+
+    .rethink-btns { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+    .rbtn-complete {
+      background: #4f8ef7; color: white; border: none;
+      padding: 12px; border-radius: 10px; font-size: 12px; font-weight: 700;
+    }
+    .rbtn-cancel {
+      background: transparent; color: #64748b;
+      border: 1px solid #1e293b;
+      padding: 10px; border-radius: 10px; font-size: 11px; font-weight: 500;
+    }
+
+    /* Screen 3: Saved */
+    .screen-saved {
+      background: #0a0f1e;
+      padding: 48px 20px 24px;
+      align-items: center; text-align: center; justify-content: center;
+    }
+    .saved-icon { font-size: 56px; margin-bottom: 16px; animation: pop 0.4s ease; }
+    @keyframes pop { 0% { transform: scale(0.5); } 80% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    .saved-title { font-size: 18px; font-weight: 800; color: white; margin-bottom: 8px; }
+    .saved-sub { font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 20px; }
+    .saved-amount { font-size: 32px; font-weight: 900; color: #22c55e; }
+    .saved-amount-label { font-size: 11px; color: #64748b; margin-top: 4px; }
+    .saved-badge {
+      background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 100px; padding: 8px 20px; margin-top: 16px;
+      font-size: 11px; font-weight: 600; color: #22c55e;
+    }
+
+    /* Glow behind phone */
+    .phone-glow {
+      position: absolute; width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(79,142,247,0.2) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      z-index: -1; pointer-events: none;
+    }
+
+    /* Step indicator */
+    .step-dots {
+      display: flex; gap: 6px; justify-content: center; margin-top: 20px;
+    }
+    .dot {
+      width: 6px; height: 6px; border-radius: 100px;
+      background: rgba(255,255,255,0.15); transition: all 0.3s;
+    }
+    .dot.active { width: 20px; background: var(--blue); }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 100px 48px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; color: var(--blue);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    }
+    h2 {
+      font-size: clamp(28px, 3vw, 44px); font-weight: 800;
+      letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px;
+    }
+    .section-sub { font-size: 17px; color: var(--gray); line-height: 1.6; max-width: 560px; }
+    .center { text-align: center; }
+    .center .section-sub { margin: 0 auto; }
+
+    /* ── PROBLEM ── */
+    .problem { background: var(--navy2); }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-top: 56px;
+    }
+    .stat-card {
+      background: var(--navy); border: 1px solid var(--gray3);
+      border-radius: 20px; padding: 32px 28px;
+      opacity: 0; transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    .stat-card.visible { opacity: 1; transform: translateY(0); }
+    .stat-card:nth-child(2) { transition-delay: 0.1s; }
+    .stat-card:nth-child(3) { transition-delay: 0.2s; }
+    .stat-num {
+      font-size: 52px; font-weight: 900; letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--blue-light), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .stat-text { font-size: 15px; color: var(--gray); line-height: 1.5; }
+    .stat-source { font-size: 11px; color: var(--gray3); margin-top: 8px; }
+
+    /* ── HOW IT WORKS ── */
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+      margin-top: 56px;
+    }
+    .step-card {
+      background: var(--gray2); border: 1px solid var(--gray3);
+      border-radius: 20px; padding: 32px;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(24px);
+      transition: all 0.5s ease;
+    }
+    .step-card.visible { opacity: 1; transform: translateY(0); }
+    .step-card:nth-child(2) { transition-delay: 0.12s; }
+    .step-card:nth-child(3) { transition-delay: 0.24s; }
+    .step-num {
+      font-size: 72px; font-weight: 900; color: rgba(79,142,247,0.08);
+      position: absolute; top: 16px; right: 20px; line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .step-icon { font-size: 32px; margin-bottom: 16px; }
+    .step-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .step-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+    /* ── AI IN ACTION ── */
+    .ai-section { background: var(--navy2); }
+    .ai-layout {
+      display: flex; gap: 80px; align-items: center; margin-top: 56px;
+    }
+    .ai-scenarios { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+    .scenario-card {
+      background: var(--navy); border: 1px solid var(--gray3);
+      border-radius: 16px; padding: 20px 24px;
+      cursor: pointer; transition: all 0.3s;
+      opacity: 0.5;
+    }
+    .scenario-card.active {
+      border-color: var(--blue); background: var(--blue-dim); opacity: 1;
+    }
+    .scenario-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .scenario-emoji { font-size: 24px; }
+    .scenario-name { font-size: 14px; font-weight: 700; }
+    .scenario-amount { font-size: 13px; color: var(--gray); }
+    .scenario-insight {
+      font-size: 13px; color: var(--gray); line-height: 1.5;
+      display: none;
+    }
+    .scenario-card.active .scenario-insight { display: block; }
+    .scenario-delay {
+      display: inline-block; margin-top: 8px;
+      background: rgba(79,142,247,0.15); color: var(--blue);
+      border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 600;
+    }
+
+    .ai-phone-wrap { flex-shrink: 0; position: relative; }
+    .ai-phone {
+      width: 240px; height: 480px;
+      background: #111827; border-radius: 36px;
+      border: 2px solid rgba(255,255,255,0.1);
+      overflow: hidden; position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    }
+    .ai-screen {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; padding: 40px 16px 20px;
+      opacity: 0; transition: opacity 0.5s ease;
+      text-align: center;
+    }
+    .ai-screen.active { opacity: 1; }
+
+    /* ── THE SCIENCE ── */
+    .science-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-top: 56px;
+    }
+    .science-card {
+      background: var(--gray2); border: 1px solid var(--gray3);
+      border-radius: 20px; padding: 32px;
+      opacity: 0; transform: translateY(20px); transition: all 0.5s ease;
+    }
+    .science-card.visible { opacity: 1; transform: translateY(0); }
+    .science-card:nth-child(2) { transition-delay: 0.1s; }
+    .science-card:nth-child(3) { transition-delay: 0.2s; }
+    .science-tag {
+      display: inline-block; background: var(--blue-dim);
+      color: var(--blue-light); border-radius: 6px;
+      padding: 4px 12px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.5px; margin-bottom: 16px;
+    }
+    .science-title { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+    .science-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
+    .science-ref { font-size: 11px; color: var(--gray3); margin-top: 12px; font-style: italic; }
+
+    /* ── FLOW ── */
+    .flow { background: var(--navy2); }
+    .flow-steps {
+      display: flex; gap: 0; margin-top: 56px; position: relative;
+      justify-content: center;
+    }
+    .flow-steps::before {
+      content: '';
+      position: absolute; top: 40px; left: calc(10% + 40px); right: calc(10% + 40px);
+      height: 2px; background: linear-gradient(90deg, var(--blue), var(--blue-light), var(--blue));
+      z-index: 0;
+    }
+    .flow-step {
+      flex: 1; max-width: 180px; text-align: center;
+      padding: 0 12px; position: relative; z-index: 1;
+      opacity: 0; transform: translateY(16px); transition: all 0.4s ease;
+    }
+    .flow-step.visible { opacity: 1; transform: translateY(0); }
+    .flow-step:nth-child(2) { transition-delay: 0.1s; }
+    .flow-step:nth-child(3) { transition-delay: 0.2s; }
+    .flow-step:nth-child(4) { transition-delay: 0.3s; }
+    .flow-step:nth-child(5) { transition-delay: 0.4s; }
+    .flow-icon {
+      width: 80px; height: 80px; margin: 0 auto 16px;
+      background: var(--navy); border: 2px solid var(--blue);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+    }
+    .flow-label { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+    .flow-desc { font-size: 11px; color: var(--gray); line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy); border-top: 1px solid var(--gray2);
+      padding: 40px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo { font-size: 18px; font-weight: 800; color: var(--blue); }
+    .footer-text { font-size: 13px; color: var(--gray); }
+    .footer-uni { font-size: 12px; color: var(--gray3); text-align: right; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { flex-direction: column; padding: 100px 24px 60px; text-align: center; gap: 48px; }
+      .hero-actions { justify-content: center; }
+      section { padding: 64px 24px; }
+      .stats-grid, .steps-grid, .science-grid { grid-template-columns: 1fr; }
+      .ai-layout { flex-direction: column; }
+      .flow-steps { flex-wrap: wrap; }
+      .flow-steps::before { display: none; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">rethink</div>
+  <div class="nav-links">
+    <a href="#problem">The Problem</a>
+    <a href="#how">How It Works</a>
+    <a href="#ai">AI Layer</a>
+    <a href="#science">The Science</a>
+  </div>
+  <button class="nav-cta">Get Early Access</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">Financial Behavior · AI Intervention</div>
+    <h1>Think before<br/>you <span>tap.</span></h1>
+    <p class="hero-sub">
+      Rethink adds a moment of deliberate reflection before every digital payment — powered by AI that learns your spending habits and surfaces the insight you need, exactly when you need it.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary">Try the Demo</button>
+      <button class="btn-ghost">Learn the Science →</button>
+    </div>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone-glow"></div>
+    <div class="phone">
+      <!-- Screen 1: Shop -->
+      <div class="screen screen-shop active" id="s1">
+        <div class="shop-header">
+          <span class="shop-title">QuickShop</span>
+          <span class="shop-cart">🛒</span>
+        </div>
+        <div class="shop-product">
+          <div class="product-img">👟</div>
+          <div class="product-name">Nike Air Max 270</div>
+          <div class="product-price">₪520</div>
+          <div class="product-sub">Free shipping · In stock</div>
+        </div>
+        <button class="buy-btn">⚡ Buy Now</button>
+      </div>
+
+      <!-- Screen 2: Rethink overlay -->
+      <div class="screen screen-rethink" id="s2">
+        <div class="rethink-logo-sm">RETHINK</div>
+        <div class="rethink-icon">🤔</div>
+        <div class="rethink-title">Pause for a moment</div>
+        <div class="rethink-sub">AI is reviewing your spending context</div>
+
+        <div class="countdown-wrap">
+          <svg class="countdown-svg" width="100" height="100" viewBox="0 0 100 100">
+            <circle class="countdown-track" cx="50" cy="50" r="40"/>
+            <circle class="countdown-prog" id="prog" cx="50" cy="50" r="40"/>
+          </svg>
+          <div class="countdown-text" id="timer">30</div>
+        </div>
+
+        <div class="ai-card">
+          <div class="ai-label">🤖 AI Insight</div>
+          <div class="ai-text">You've spent <span class="ai-highlight">₪1,240 on shopping</span> this month — already <span class="ai-highlight">85% of your budget.</span> This would push you over.</div>
+        </div>
+
+        <div class="spend-bar-wrap">
+          <div class="spend-bar-label">
+            <span>Monthly shopping budget</span>
+            <strong>85% used</strong>
+          </div>
+          <div class="spend-bar-track">
+            <div class="spend-bar-fill" style="width:85%;"></div>
+          </div>
+        </div>
+
+        <div class="rethink-btns">
+          <button class="rbtn-complete">Complete Payment</button>
+          <button class="rbtn-cancel">Save to Wishlist · Reconsider later</button>
+        </div>
+      </div>
+
+      <!-- Screen 3: Saved -->
+      <div class="screen screen-saved" id="s3">
+        <div class="saved-icon">🎉</div>
+        <div class="saved-title">Smart choice!</div>
+        <div class="saved-sub">You saved this to your wishlist.<br/>Check back in 24 hours.</div>
+        <div class="saved-amount">₪520</div>
+        <div class="saved-amount-label">saved from impulse</div>
+        <div class="saved-badge">+1 mindful decision today ✓</div>
+      </div>
+    </div>
+
+    <div class="step-dots">
+      <div class="dot active" id="d1"></div>
+      <div class="dot" id="d2"></div>
+      <div class="dot" id="d3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="center">
+    <div class="section-label">The Problem</div>
+    <h2>The pain of paying<br/>has disappeared.</h2>
+    <p class="section-sub">Cash made spending feel real. Digital payments removed that friction entirely — and our spending behavior changed with it.</p>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num">83%</div>
+      <div class="stat-text">More is spent via digital payments compared to cash for equivalent purchases</div>
+      <div class="stat-source">Prelec & Loewenstein, 1998</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">2 in 3</div>
+      <div class="stat-text">Online purchases are made impulsively, without prior planning or comparison</div>
+      <div class="stat-source">NRF Consumer Survey, 2023</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">40%</div>
+      <div class="stat-text">Of consumers report regular post-purchase regret on digital transactions</div>
+      <div class="stat-source">CreditKarma, 2022</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="center">
+    <div class="section-label">How It Works</div>
+    <h2>Three steps to<br/>deliberate spending.</h2>
+    <p class="section-sub">Rethink integrates with your payment flow and intervenes at the exact moment of decision.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-icon">👆</div>
+      <div class="step-title">You tap "Pay"</div>
+      <div class="step-desc">Rethink activates automatically before any digital checkout — app, browser, or wallet. No action required.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-icon">🤖</div>
+      <div class="step-title">AI reads your context</div>
+      <div class="step-desc">In real time, our model analyzes your spending history, category, time of day, and deviation from your baseline to set a personalized delay and generate a targeted insight.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-icon">✅</div>
+      <div class="step-title">You decide — informed</div>
+      <div class="step-desc">Complete the payment, save to your 24-hour wishlist, or cancel. Every choice feeds the AI to make future interventions sharper.</div>
+    </div>
+  </div>
+</section>
+
+<!-- AI IN ACTION -->
+<section class="ai-section" id="ai">
+  <div class="section-label">AI Layer</div>
+  <h2>The AI adapts to you.<br/>Not the other way around.</h2>
+  <p class="section-sub">Delay duration and insight messaging are dynamically personalized — based on what you actually spend, when, and how much you deviate from your own norm.</p>
+
+  <div class="ai-layout">
+    <div class="ai-scenarios">
+      <div class="scenario-card active" data-scenario="0">
+        <div class="scenario-head">
+          <span class="scenario-emoji">👟</span>
+          <div>
+            <div class="scenario-name">Fashion purchase</div>
+            <div class="scenario-amount">₪520 · Discretionary</div>
+          </div>
+        </div>
+        <div class="scenario-insight">
+          "You've bought 3 clothing items this week totaling ₪890. This is 2.3× your weekly average. You returned 1 item last month after a similar pattern."
+          <div><span class="scenario-delay">⏱ 30-second pause</span></div>
+        </div>
+      </div>
+
+      <div class="scenario-card" data-scenario="1">
+        <div class="scenario-head">
+          <span class="scenario-emoji">🍕</span>
+          <div>
+            <div class="scenario-name">Food delivery</div>
+            <div class="scenario-amount">₪89 · Frequent</div>
+          </div>
+        </div>
+        <div class="scenario-insight">
+          "This is your 4th delivery order this week — ₪280 spent. At this pace you'll hit ₪1,120 this month, nearly 3× last month."
+          <div><span class="scenario-delay">⏱ 15-second pause</span></div>
+        </div>
+      </div>
+
+      <div class="scenario-card" data-scenario="2">
+        <div class="scenario-head">
+          <span class="scenario-emoji">💻</span>
+          <div>
+            <div class="scenario-name">Electronics</div>
+            <div class="scenario-amount">₪3,200 · Large purchase</div>
+          </div>
+        </div>
+        <div class="scenario-insight">
+          "This is a significant purchase — equivalent to 18 hours of your work. You've bought 2 large electronics items in the past 60 days."
+          <div><span class="scenario-delay">⏱ 24-hour hold</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI demo phone -->
+    <div class="ai-phone-wrap">
+      <div class="ai-phone">
+        <div class="ai-screen active" id="ai-s0">
+          <div style="font-size:11px;font-weight:700;color:#4f8ef7;letter-spacing:2px;margin-bottom:16px;">RETHINK AI</div>
+          <div style="font-size:32px;margin-bottom:8px;">👟</div>
+          <div style="font-size:13px;font-weight:700;color:white;margin-bottom:4px;">Nike Air Max 270</div>
+          <div style="font-size:20px;font-weight:900;color:#4f8ef7;margin-bottom:16px;">₪520</div>
+          <div style="background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.25);border-radius:10px;padding:12px;text-align:left;width:100%;margin-bottom:12px;">
+            <div style="font-size:9px;color:#4f8ef7;font-weight:700;letter-spacing:1px;margin-bottom:6px;">🤖 AI INSIGHT</div>
+            <div style="font-size:10px;color:#cbd5e1;line-height:1.5;">3 clothing items this week · ₪890 total · <strong style="color:white;">2.3× your average</strong></div>
+          </div>
+          <div style="width:100%;background:#1e293b;border-radius:8px;height:6px;margin-bottom:16px;overflow:hidden;">
+            <div style="width:85%;height:100%;background:linear-gradient(90deg,#4f8ef7,#f59e0b);border-radius:8px;"></div>
+          </div>
+          <div style="font-size:22px;font-weight:900;color:white;margin-bottom:4px;" id="ai-timer-0">30</div>
+          <div style="font-size:9px;color:#64748b;margin-bottom:12px;">seconds remaining</div>
+          <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+            <div style="background:#4f8ef7;color:white;border-radius:8px;padding:10px;font-size:11px;font-weight:700;text-align:center;">Complete Payment</div>
+            <div style="border:1px solid #1e293b;color:#64748b;border-radius:8px;padding:8px;font-size:10px;text-align:center;">Save to Wishlist</div>
+          </div>
+        </div>
+
+        <div class="ai-screen" id="ai-s1">
+          <div style="font-size:11px;font-weight:700;color:#4f8ef7;letter-spacing:2px;margin-bottom:16px;">RETHINK AI</div>
+          <div style="font-size:32px;margin-bottom:8px;">🍕</div>
+          <div style="font-size:13px;font-weight:700;color:white;margin-bottom:4px;">Food Delivery</div>
+          <div style="font-size:20px;font-weight:900;color:#4f8ef7;margin-bottom:16px;">₪89</div>
+          <div style="background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.25);border-radius:10px;padding:12px;text-align:left;width:100%;margin-bottom:12px;">
+            <div style="font-size:9px;color:#4f8ef7;font-weight:700;letter-spacing:1px;margin-bottom:6px;">🤖 AI INSIGHT</div>
+            <div style="font-size:10px;color:#cbd5e1;line-height:1.5;">4th delivery this week · <strong style="color:white;">₪280 spent</strong> · Pace = ₪1,120/mo</div>
+          </div>
+          <div style="font-size:22px;font-weight:900;color:white;margin-bottom:4px;">15</div>
+          <div style="font-size:9px;color:#64748b;margin-bottom:12px;">seconds remaining</div>
+          <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+            <div style="background:#4f8ef7;color:white;border-radius:8px;padding:10px;font-size:11px;font-weight:700;text-align:center;">Complete Payment</div>
+            <div style="border:1px solid #1e293b;color:#64748b;border-radius:8px;padding:8px;font-size:10px;text-align:center;">Save to Wishlist</div>
+          </div>
+        </div>
+
+        <div class="ai-screen" id="ai-s2">
+          <div style="font-size:11px;font-weight:700;color:#f59e0b;letter-spacing:2px;margin-bottom:16px;">RETHINK AI</div>
+          <div style="font-size:32px;margin-bottom:8px;">💻</div>
+          <div style="font-size:13px;font-weight:700;color:white;margin-bottom:4px;">Electronics</div>
+          <div style="font-size:20px;font-weight:900;color:#f59e0b;margin-bottom:16px;">₪3,200</div>
+          <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:12px;text-align:left;width:100%;margin-bottom:12px;">
+            <div style="font-size:9px;color:#f59e0b;font-weight:700;letter-spacing:1px;margin-bottom:6px;">🤖 AI INSIGHT</div>
+            <div style="font-size:10px;color:#cbd5e1;line-height:1.5;"><strong style="color:white;">18 hours of work.</strong> 2nd large purchase in 60 days. A pause will help.</div>
+          </div>
+          <div style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);border-radius:8px;padding:10px;text-align:center;margin-bottom:12px;">
+            <div style="font-size:16px;margin-bottom:2px;">⏱</div>
+            <div style="font-size:13px;font-weight:800;color:#f59e0b;">24-Hour Hold</div>
+            <div style="font-size:9px;color:#64748b;">Big purchase detected</div>
+          </div>
+          <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+            <div style="background:#f59e0b;color:#0a0f1e;border-radius:8px;padding:10px;font-size:11px;font-weight:700;text-align:center;">Save & Review Tomorrow</div>
+            <div style="border:1px solid #1e293b;color:#64748b;border-radius:8px;padding:8px;font-size:10px;text-align:center;">Pay Anyway</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE SCIENCE -->
+<section id="science">
+  <div class="center">
+    <div class="section-label">Behavioral Science</div>
+    <h2>Built on decades of<br/>economic research.</h2>
+    <p class="section-sub">Every design decision in Rethink is grounded in peer-reviewed behavioral economics literature.</p>
+  </div>
+  <div class="science-grid">
+    <div class="science-card">
+      <div class="science-tag">Present Bias</div>
+      <div class="science-title">We overvalue now.</div>
+      <div class="science-desc">Humans systematically overweight immediate rewards compared to future ones — making impulsive purchases feel right in the moment and regrettable minutes later. A brief pause rebalances this equation.</div>
+      <div class="science-ref">Laibson, D. (1997). Quarterly Journal of Economics.</div>
+    </div>
+    <div class="science-card">
+      <div class="science-tag">Pain of Paying</div>
+      <div class="science-title">Cash hurt. Tapping doesn't.</div>
+      <div class="science-desc">Paying with cash activates neural pain responses that curb spending. Digital payment has eliminated this friction entirely. Rethink reintroduces a cognitive equivalent of that pain.</div>
+      <div class="science-ref">Prelec & Loewenstein (1998). Marketing Science.</div>
+    </div>
+    <div class="science-card">
+      <div class="science-tag">Temporal Friction</div>
+      <div class="science-title">Time changes decisions.</div>
+      <div class="science-desc">Introducing a mandatory delay between impulse and action allows System 2 thinking to engage. Even a 10-second pause is enough to reduce impulsive choice rates significantly.</div>
+      <div class="science-ref">Frederick, Loewenstein & O'Donoghue (2002). JEL.</div>
+    </div>
+  </div>
+</section>
+
+<!-- USER FLOW -->
+<section class="flow" id="flow">
+  <div class="center">
+    <div class="section-label">User Flow</div>
+    <h2>The intervention embedded<br/>in every payment moment.</h2>
+  </div>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="flow-icon">👆</div>
+      <div class="flow-label">Tap "Pay"</div>
+      <div class="flow-desc">User initiates any digital payment</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-icon">🔮</div>
+      <div class="flow-label">AI Analyzes</div>
+      <div class="flow-desc">Amount, category, history, baseline deviation</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-icon">⏱</div>
+      <div class="flow-label">Pause + Insight</div>
+      <div class="flow-desc">Countdown + personalized AI message appears</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-icon">🤔</div>
+      <div class="flow-label">User Decides</div>
+      <div class="flow-desc">Pay / Save to wishlist / Cancel</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-icon">📈</div>
+      <div class="flow-label">AI Learns</div>
+      <div class="flow-desc">Decision feeds model for sharper future nudges</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">rethink</div>
+  <div class="footer-text">A behavioral economics intervention · Financial Behavior domain</div>
+  <div class="footer-uni">Behavioral Economics From Theory to Practice<br/>Reichman University · May 2026</div>
+</footer>
+
+<script>
+  // ── Hero phone animation ──
+  const screens = ['s1','s2','s3'];
+  const dots = ['d1','d2','d3'];
+  let current = 0;
+  let timerInterval = null;
+  let timerVal = 30;
+  const circumference = 2 * Math.PI * 40; // 251.2
+
+  function showScreen(idx) {
+    screens.forEach((id, i) => {
+      document.getElementById(id).classList.toggle('active', i === idx);
+    });
+    dots.forEach((id, i) => {
+      document.getElementById(id).classList.toggle('active', i === idx);
+    });
+  }
+
+  function runCountdown() {
+    const prog = document.getElementById('prog');
+    const timerEl = document.getElementById('timer');
+    timerVal = 30;
+    if (timerInterval) clearInterval(timerInterval);
+
+    prog.style.strokeDashoffset = '0';
+    timerEl.textContent = timerVal;
+
+    timerInterval = setInterval(() => {
+      timerVal--;
+      timerEl.textContent = timerVal;
+      const offset = circumference * (1 - timerVal / 30);
+      prog.style.strokeDashoffset = offset;
+      if (timerVal <= 0) {
+        clearInterval(timerInterval);
+      }
+    }, 1000);
+  }
+
+  function heroLoop() {
+    // Show shop first, then rethink with countdown, then saved
+    const sequence = [
+      { idx: 0, duration: 2500 },
+      { idx: 1, duration: 5000, onShow: runCountdown },
+      { idx: 2, duration: 2500 },
+    ];
+
+    let step = 0;
+    function next() {
+      const s = sequence[step % sequence.length];
+      current = s.idx;
+      showScreen(s.idx);
+      if (s.onShow) s.onShow();
+      step++;
+      setTimeout(next, s.duration);
+    }
+    next();
+  }
+  heroLoop();
+
+  // ── Intersection observer for fade-in ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.stat-card, .step-card, .science-card, .flow-step').forEach(el => observer.observe(el));
+
+  // ── AI scenarios ──
+  const scenarioCards = document.querySelectorAll('.scenario-card');
+  const aiScreens = document.querySelectorAll('.ai-screen');
+  let currentScenario = 0;
+
+  function setScenario(idx) {
+    scenarioCards.forEach((c, i) => c.classList.toggle('active', i === idx));
+    aiScreens.forEach((s, i) => s.classList.toggle('active', i === idx));
+    currentScenario = idx;
+  }
+
+  scenarioCards.forEach((card, idx) => {
+    card.addEventListener('click', () => setScenario(idx));
+  });
+
+  // Auto-cycle scenarios
+  setInterval(() => {
+    setScenario((currentScenario + 1) % scenarioCards.length);
+  }, 4000);
+</script>
+</body>
+</html>
