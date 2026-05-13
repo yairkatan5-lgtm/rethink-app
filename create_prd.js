@@ -295,7 +295,6 @@ const doc = new Document({
           spacing: { before: 0, after: 240 },
           children: [new TextRun({ text: "References", bold: true, size: pt(14), font: "Times New Roman" })]
         }),
-        reference("Ayal, S., Celse, J., & Hochman, G. (2019). Crafting messages to fight dishonesty. Journal of Economic Behavior & Organization, 160, 240-250."),
         reference("Frederick, S., Loewenstein, G., & O'Donoghue, T. (2002). Time discounting and time preference: A critical review. Journal of Economic Literature, 40(2), 351-401."),
         reference("Laibson, D. (1997). Golden eggs and hyperbolic discounting. Quarterly Journal of Economics, 112(2), 443-478."),
         reference("Michie, S., van Stralen, M. M., & West, R. (2011). The behaviour change wheel: A new method for characterising and designing behaviour change interventions. Implementation Science, 6(1), 42."),
