@@ -180,7 +180,7 @@ const doc = new Document({
         spacer(),
         new Paragraph({ spacing: { before: 160, after: 80 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Course: Behavioral Economics From Theory to Practice", size: pt(12), font: "Times New Roman" })] }),
         new Paragraph({ spacing: { before: 0, after: 80 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Instructors: Dr. Yossi Hasson & Mr. Tomer Toueg", size: pt(12), font: "Times New Roman" })] }),
-        new Paragraph({ spacing: { before: 0, after: 80 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Reichman University — Tiomkin School of Economics", size: pt(12), font: "Times New Roman" })] }),
+        new Paragraph({ spacing: { before: 0, after: 80 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Reichman University, Tiomkin School of Economics", size: pt(12), font: "Times New Roman" })] }),
         new Paragraph({ spacing: { before: 0, after: 80 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Baruch Ivcher School of Psychology", size: pt(12), font: "Times New Roman" })] }),
         spacer(),
         spacer(),
@@ -211,12 +211,12 @@ const doc = new Document({
             new TextRun({ text: "Financial Behavior", italics: true, size: pt(12), font: "Times New Roman" })
           ]
         }),
-        body("Digital payments have systematically eliminated the \"pain of paying\" — the psychological discomfort that cash transactions once provided as a natural brake on spending. One-tap checkout, stored payment credentials, and invisible micro-transactions have removed all friction from the purchase moment. Research shows consumers spend significantly more when paying digitally versus with cash (Prelec & Loewenstein, 1998), and impulsive online purchases account for the majority of e-commerce volume. The behavioral challenge is that the architecture of digital commerce is designed to minimize deliberation, exploiting present bias and making the long-term cost of a purchase invisible at the moment of decision. Rethink addresses this by reintroducing targeted, AI-personalized friction before digital payment completion.", { justify: true }),
+        body("Digital payments have systematically eliminated the \"pain of paying\", the psychological discomfort that cash transactions once provided as a natural brake on spending. One-tap checkout, stored payment credentials, and invisible micro-transactions have removed all friction from the purchase moment. Research shows consumers spend significantly more when paying digitally versus with cash (Prelec & Loewenstein, 1998), and impulsive online purchases account for the majority of e-commerce volume. The behavioral challenge is that the architecture of digital commerce is designed to minimize deliberation, exploiting present bias and making the long-term cost of a purchase invisible at the moment of decision. Rethink addresses this by reintroducing targeted, AI-personalized friction before digital payment completion.", { justify: true }),
         spacer(),
 
         // Target Users
         heading("Target Users"),
-        body("Rethink targets any individual who makes digital payments — with a primary focus on adults aged 18-40 who use mobile wallets, app-based checkout, or online shopping regularly. This group is most exposed to frictionless payment UX and most susceptible to impulse spending driven by digital design patterns. The solution is universally applicable: whether the user overspends on fashion, food delivery, or subscriptions, the AI layer adapts the intervention to their specific pattern.", { justify: true }),
+        body("Rethink targets any individual who makes digital payments, with a primary focus on adults aged 18-40 who use mobile wallets, app-based checkout, or online shopping regularly. This group is most exposed to frictionless payment UX and most susceptible to impulse spending driven by digital design patterns. The solution is universally applicable: whether the user overspends on fashion, food delivery, or subscriptions, the AI layer adapts the intervention to their specific pattern.", { justify: true }),
         spacer(),
 
         // COM-B
@@ -225,18 +225,18 @@ const doc = new Document({
         spacer(),
         comBTable(),
         spacer(),
-        body("Capability — Psychological: Users lack real-time awareness of spending patterns relative to their own baseline or budget. The individual transaction feels small and inconsequential, making it difficult to connect it to aggregate financial outcomes.", { justify: true }),
-        body("Opportunity — Physical: The environment is structured to remove friction. One-tap checkout, saved credentials, and seamless UX eliminate the natural pause that cash or card-swipe once provided. Twenty-four-hour access to shopping means the opportunity to spend is constant and unrestricted.", { justify: true }),
-        body("Motivation — Automatic: Present bias (Laibson, 1997) causes users to overweight the immediate reward of a purchase relative to future financial wellbeing. The dopamine response to a desirable item overrides deliberative reasoning. Emotional states (stress, boredom) further amplify automatic motivational responses, bypassing reflective decision-making.", { justify: true }),
+        body("Capability - Psychological: Users lack real-time awareness of spending patterns relative to their own baseline or budget. The individual transaction feels small and inconsequential, making it difficult to connect it to aggregate financial outcomes.", { justify: true }),
+        body("Opportunity - Physical: The environment is structured to remove friction. One-tap checkout, saved credentials, and seamless UX eliminate the natural pause that cash or card-swipe once provided. Twenty-four-hour access to shopping means the opportunity to spend is constant and unrestricted.", { justify: true }),
+        body("Motivation - Automatic: Present bias (Laibson, 1997) causes users to overweight the immediate reward of a purchase relative to future financial wellbeing. The dopamine response to a desirable item overrides deliberative reasoning. Emotional states (stress, boredom) further amplify automatic motivational responses, bypassing reflective decision-making.", { justify: true }),
         spacer(),
 
         // BCW
         heading("Intervention Design (BCW)"),
         body("Applying the Behaviour Change Wheel (Michie et al., 2011), three candidate interventions were identified:"),
         spacer(),
-        numbered(1, "Environmental Restructuring —", "Introduce a mandatory temporal pause (delay) before payment completion. This directly modifies the opportunity dimension by adding friction to an otherwise frictionless environment. The pause creates a decision window that did not previously exist."),
-        numbered(2, "Education / Enablement —", "Display personalized spending context during the delay window. This addresses the capability barrier by surfacing information the user possesses but cannot access in the moment: how this purchase compares to their weekly average, how much of their category budget remains, and the cumulative cost of similar purchases."),
-        numbered(3, "Persuasion —", "AI-generated framing of the purchase decision. Rather than generic warnings, the AI produces a personalized, data-driven message tailored to the user's own behavioral pattern (e.g., \"You returned a similar item last month\" or \"This is equivalent to 3 hours of your work\"). This activates reflective motivation to counterbalance automatic impulses."),
+        numbered(1, "Environmental Restructuring:", "Introduce a mandatory temporal pause (delay) before payment completion. This directly modifies the opportunity dimension by adding friction to an otherwise frictionless environment. The pause creates a decision window that did not previously exist."),
+        numbered(2, "Education / Enablement:", "Display personalized spending context during the delay window. This addresses the capability barrier by surfacing information the user possesses but cannot access in the moment: how this purchase compares to their weekly average, how much of their category budget remains, and the cumulative cost of similar purchases."),
+        numbered(3, "Persuasion:", "AI-generated framing of the purchase decision. Rather than generic warnings, the AI produces a personalized, data-driven message tailored to the user's own behavioral pattern (e.g., \"You returned a similar item last month\" or \"This is equivalent to 3 hours of your work\"). This activates reflective motivation to counterbalance automatic impulses."),
         spacer(),
 
         // APEASE
@@ -251,20 +251,20 @@ const doc = new Document({
         heading("AI Functionality"),
         body("The AI layer is the core differentiator of Rethink. It performs two functions:"),
         spacer(),
-        numbered(1, "Dynamic Delay Calibration:", "The AI determines the duration of the pause based on multiple real-time signals — purchase amount, spending category (discretionary vs. essential), spending velocity, deviation from the user's historical baseline, and time of day. A small, routine grocery purchase triggers a 10-second pause. A large, uncharacteristic discretionary purchase triggers a 24-hour hold. This personalization ensures the intervention is proportional and relevant, not uniformly disruptive."),
+        numbered(1, "Dynamic Delay Calibration:", "The AI determines the duration of the pause based on multiple real-time signals, purchase amount, spending category (discretionary vs. essential), spending velocity, deviation from the user's historical baseline, and time of day. A small, routine grocery purchase triggers a 10-second pause. A large, uncharacteristic discretionary purchase triggers a 24-hour hold. This personalization ensures the intervention is proportional and relevant, not uniformly disruptive."),
         numbered(2, "Personalized Insight Generation:", "During the delay window, the AI surfaces 1-2 data-driven insights drawn from the user's own transaction history. Examples include budget utilization (\"85% of your monthly shopping budget used\"), behavioral patterns (\"4th delivery order this week\"), social comparison (\"spending 2.3x your weekly average\"), and loss framing (\"equivalent to 2.5 hours of work\"). The AI selects the framing most likely to be effective for that user's pattern, learning from which messages correlate with reconsideration decisions."),
         spacer(),
 
         // User Flow
         heading("User Flow / Experience"),
-        body("The behavioral intervention is embedded at the highest-stakes moment — the payment decision itself:"),
+        body("The behavioral intervention is embedded at the highest-stakes moment, the payment decision itself:"),
         spacer(),
         ...[
           ["1.", "The user initiates a digital payment (in-app, mobile wallet, or browser checkout)."],
           ["2.", "The Rethink overlay appears immediately, intercepting the payment confirmation."],
           ["3.", "A countdown timer displays the AI-determined delay duration, alongside a personalized insight card."],
           ["4.", "The user is presented with three options: Complete Payment (available after delay), Save to 24-Hour Wishlist, or Cancel."],
-          ["5.", "If the user saves to the wishlist, a re-evaluation prompt is sent after 24 hours — by which time the immediate impulse has typically dissipated."],
+          ["5.", "If the user saves to the wishlist, a re-evaluation prompt is sent after 24 hours, by which time the immediate impulse has typically dissipated."],
           ["6.", "The user's decision is logged and fed back into the AI model, continuously improving calibration and messaging for future interventions."],
         ].map(([n, t]) => new Paragraph({
           spacing: { before: 60, after: 60 },
@@ -275,18 +275,18 @@ const doc = new Document({
           ]
         })),
         spacer(),
-        body("The flow is designed so the behavioral intervention feels like a helpful assistant, not a blocker — maintaining user autonomy while systematically engaging reflective processing at the critical moment.", { justify: true }),
+        body("The flow is designed so the behavioral intervention feels like a helpful assistant, not a blocker, maintaining user autonomy while systematically engaging reflective processing at the critical moment.", { justify: true }),
         spacer(),
 
         // Success Metrics
         heading("Success Metrics"),
         body("Following the Test, Learn, Adapt framework, Rethink's effectiveness will be evaluated through:"),
         spacer(),
-        bodyBold("Primary Metric — Reconsideration Rate: ", "The percentage of triggered delay sessions where the user defers or cancels rather than completes the payment immediately. Target: >=20% reconsideration rate within 60 days of onboarding."),
-        bodyBold("Secondary Metric — Financial Wellbeing Score: ", "Monthly user-reported satisfaction with spending behavior (1-10 scale). Target: statistically significant improvement at 90 days."),
-        bodyBold("Behavioral Metric — Spending Trend: ", "Aggregate discretionary spending change in connected accounts over a 90-day intervention period versus a matched control group."),
-        bodyBold("Experimental Design — A/B Test: ", "8-week randomized trial comparing the full Rethink intervention (delay + AI insight) against: a control condition (no friction) and a partial condition (delay only, no AI personalization). This design isolates the contribution of the AI layer."),
-        bodyBold("Adaptation: ", "Insights from A/B testing will inform monthly model updates — adjusting delay thresholds, refining insight framing, and personalizing trigger conditions based on cohort-level response patterns."),
+        bodyBold("Primary Metric - Reconsideration Rate: ", "The percentage of triggered delay sessions where the user defers or cancels rather than completes the payment immediately. Target: >=20% reconsideration rate within 60 days of onboarding."),
+        bodyBold("Secondary Metric - Financial Wellbeing Score: ", "Monthly user-reported satisfaction with spending behavior (1-10 scale). Target: statistically significant improvement at 90 days."),
+        bodyBold("Behavioral Metric - Spending Trend: ", "Aggregate discretionary spending change in connected accounts over a 90-day intervention period versus a matched control group."),
+        bodyBold("Experimental Design - A/B Test: ", "8-week randomized trial comparing the full Rethink intervention (delay + AI insight) against: a control condition (no friction) and a partial condition (delay only, no AI personalization). This design isolates the contribution of the AI layer."),
+        bodyBold("Adaptation: ", "Insights from A/B testing will inform monthly model updates, adjusting delay thresholds, refining insight framing, and personalizing trigger conditions based on cohort-level response patterns."),
         spacer(),
 
         // References (new page)
@@ -305,11 +305,11 @@ const doc = new Document({
         new Paragraph({ children: [new PageBreak()] }),
         new Paragraph({
           spacing: { before: 0, after: 240 },
-          children: [new TextRun({ text: "Appendix A — Prototype Links", bold: true, size: pt(14), font: "Times New Roman" })]
+          children: [new TextRun({ text: "Appendix A - Prototype Links", bold: true, size: pt(14), font: "Times New Roman" })]
         }),
         new Paragraph({
           spacing: { before: 0, after: 80, ...LS },
-          children: [new TextRun({ text: "Deliverable 1 — Interactive AI Prototype (Gemini Gem):", bold: true, size: pt(12), font: "Times New Roman" })]
+          children: [new TextRun({ text: "Deliverable 1 - Interactive AI Prototype (Gemini Gem):", bold: true, size: pt(12), font: "Times New Roman" })]
         }),
         new Paragraph({
           spacing: { before: 0, after: 160, ...LS },
@@ -320,11 +320,11 @@ const doc = new Document({
             })
           ]
         }),
-        body("The Rethink AI Gem is a working behavioral-economics AI built on Google Gemini. It receives a purchase description, identifies the behavioral archetype (Impulsive / Emotional / Cumulative / Aligned), applies the appropriate intervention logic (Future-Self Bridge, Trigger Nudge, Loss Frame, or Affirmation), and returns a personalised delay recommendation with an AI-generated insight — exactly as the real app would. No account required; accessible via the link above."),
+        body("The Rethink AI Gem is a working behavioral-economics AI built on Google Gemini. It receives a purchase description, identifies the behavioral archetype (Impulsive / Emotional / Cumulative / Aligned), applies the appropriate intervention logic (Future-Self Bridge, Trigger Nudge, Loss Frame, or Affirmation), and returns a personalised delay recommendation with an AI-generated insight, exactly as the real app would. No account required; accessible via the link above."),
         spacer(),
         new Paragraph({
           spacing: { before: 0, after: 80, ...LS },
-          children: [new TextRun({ text: "Deliverable 2 — Interactive Mockup Website:", bold: true, size: pt(12), font: "Times New Roman" })]
+          children: [new TextRun({ text: "Deliverable 2 - Interactive Mockup Website:", bold: true, size: pt(12), font: "Times New Roman" })]
         }),
         new Paragraph({
           spacing: { before: 0, after: 160, ...LS },
