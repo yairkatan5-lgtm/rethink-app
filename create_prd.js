@@ -132,7 +132,7 @@ function apeaseTable() {
   const rows = [
     ["Affordability", "High", "Software-only; no physical infrastructure required."],
     ["Practicability", "High", "Implementable as mobile overlay via iOS/Android payment SDKs."],
-    ["Effectiveness", "High", "Temporal friction robustly reduces impulsive choice (Frederick et al., 2002)."],
+    ["Effectiveness", "High", "Temporal friction reduces impulsive choice; supported by experimental evidence (Frederick et al., 2002)."],
     ["Acceptability", "High", "Opt-in; user retains full control and may override at any point."],
     ["Side-effects", "Low", "No coercion; friction applies only to discretionary purchases."],
     ["Equity", "High", "Applicable across all income levels; requires only a smartphone."],
@@ -211,12 +211,12 @@ const doc = new Document({
             new TextRun({ text: "Financial Behavior", italics: true, size: pt(12), font: "Times New Roman" })
           ]
         }),
-        body("Digital payments have systematically eliminated the \"pain of paying\", the psychological discomfort that cash transactions once provided as a natural brake on spending. One-tap checkout, stored payment credentials, and invisible micro-transactions have removed all friction from the purchase moment. Research shows consumers spend significantly more when paying digitally versus with cash (Prelec & Loewenstein, 1998), and impulsive online purchases account for the majority of e-commerce volume. The behavioral challenge is that the architecture of digital commerce is designed to minimize deliberation, exploiting present bias and making the long-term cost of a purchase invisible at the moment of decision. Rethink addresses this by reintroducing targeted, AI-personalized friction before digital payment completion.", { justify: true }),
+        body("Digital payments have largely eliminated the \"pain of paying\" - the psychological discomfort that cash once provided as a natural spending brake. One-tap checkout and stored credentials mean there is no pause between impulse and purchase. Consumers spend more when paying digitally than with cash (Prelec & Loewenstein, 1998), and impulse purchases account for the majority of e-commerce volume. The problem is structural: digital commerce is built to minimize hesitation. Present bias means users discount future regret in favor of immediate reward, and the removal of physical payment friction leaves nothing to interrupt that pattern. Rethink re-introduces a deliberate pause before payment completion, with AI-generated context drawn from the user's own spending data.", { justify: true }),
         spacer(),
 
         // Target Users
         heading("Target Users"),
-        body("Rethink targets any individual who makes digital payments, with a primary focus on adults aged 18-40 who use mobile wallets, app-based checkout, or online shopping regularly. This group is most exposed to frictionless payment UX and most susceptible to impulse spending driven by digital design patterns. The solution is universally applicable: whether the user overspends on fashion, food delivery, or subscriptions, the AI layer adapts the intervention to their specific pattern.", { justify: true }),
+        body("The primary audience is adults aged 18-40 who regularly pay via mobile wallet, app checkout, or online shopping. This group faces the highest exposure to UX designed to reduce purchase hesitation. The approach is not category-specific: the AI adapts its intervention to the user's own behavioral history, regardless of what they are buying.", { justify: true }),
         spacer(),
 
         // COM-B
@@ -225,18 +225,18 @@ const doc = new Document({
         spacer(),
         comBTable(),
         spacer(),
-        body("Capability - Psychological: Users lack real-time awareness of spending patterns relative to their own baseline or budget. The individual transaction feels small and inconsequential, making it difficult to connect it to aggregate financial outcomes.", { justify: true }),
-        body("Opportunity - Physical: The environment is structured to remove friction. One-tap checkout, saved credentials, and seamless UX eliminate the natural pause that cash or card-swipe once provided. Twenty-four-hour access to shopping means the opportunity to spend is constant and unrestricted.", { justify: true }),
-        body("Motivation - Automatic: Present bias (Laibson, 1997) causes users to overweight the immediate reward of a purchase relative to future financial wellbeing. The dopamine response to a desirable item overrides deliberative reasoning. Emotional states (stress, boredom) further amplify automatic motivational responses, bypassing reflective decision-making.", { justify: true }),
+        body("Capability - Psychological: Users typically lack real-time awareness of how a given purchase fits their spending pattern. Each transaction feels small in isolation; the cumulative effect is rarely visible until after the fact.", { justify: true }),
+        body("Opportunity - Physical: The payment environment is built to eliminate hesitation. One-tap checkout and saved credentials remove the natural pause that physically handing over cash once imposed. Purchases are available at any hour, with no cooling-off period built into the experience.", { justify: true }),
+        body("Motivation - Automatic: Present bias (Laibson, 1997) causes the immediate appeal of a purchase to outweigh its future cost. The dopamine response to a desired item tends to override slower, deliberate reasoning. Emotional states such as stress or boredom reinforce this by increasing impulsivity at the moment of purchase.", { justify: true }),
         spacer(),
 
         // BCW
         heading("Intervention Design (BCW)"),
-        body("Applying the Behaviour Change Wheel (Michie et al., 2011), three candidate interventions were identified:"),
+        body("Drawing on the Behaviour Change Wheel (Michie et al., 2011), we considered three intervention approaches:"),
         spacer(),
-        numbered(1, "Environmental Restructuring:", "Introduce a mandatory temporal pause (delay) before payment completion. This directly modifies the opportunity dimension by adding friction to an otherwise frictionless environment. The pause creates a decision window that did not previously exist."),
-        numbered(2, "Education / Enablement:", "Display personalized spending context during the delay window. This addresses the capability barrier by surfacing information the user possesses but cannot access in the moment: how this purchase compares to their weekly average, how much of their category budget remains, and the cumulative cost of similar purchases."),
-        numbered(3, "Persuasion:", "AI-generated framing of the purchase decision. Rather than generic warnings, the AI produces a personalized, data-driven message tailored to the user's own behavioral pattern (e.g., \"You returned a similar item last month\" or \"This is equivalent to 3 hours of your work\"). This activates reflective motivation to counterbalance automatic impulses."),
+        numbered(1, "Environmental Restructuring:", "A mandatory pause before payment completes. This adds friction to a frictionless environment, creating a decision window where none existed before."),
+        numbered(2, "Education / Enablement:", "Show the user relevant spending data during the pause - how this purchase fits against their weekly average, remaining category budget, and running total. The information already exists in their transaction history; the problem is that it is not visible at the moment of purchase."),
+        numbered(3, "Persuasion:", "Rather than a generic warning, the AI generates a message tied to the user's own history - for example, 'You returned a similar item last month' or 'At your salary, this is about 3 hours of work.' Personal data is more likely to shift a decision than an abstract caution."),
         spacer(),
 
         // APEASE
@@ -249,23 +249,23 @@ const doc = new Document({
 
         // AI Functionality
         heading("AI Functionality"),
-        body("The AI layer is the core differentiator of Rethink. It performs two functions:"),
+        body("The AI layer is what separates Rethink from a simple timer. It does two things:"),
         spacer(),
-        numbered(1, "Dynamic Delay Calibration:", "The AI determines the duration of the pause based on multiple real-time signals, purchase amount, spending category (discretionary vs. essential), spending velocity, deviation from the user's historical baseline, and time of day. A small, routine grocery purchase triggers a 10-second pause. A large, uncharacteristic discretionary purchase triggers a 24-hour hold. This personalization ensures the intervention is proportional and relevant, not uniformly disruptive."),
-        numbered(2, "Personalized Insight Generation:", "During the delay window, the AI surfaces 1-2 data-driven insights drawn from the user's own transaction history. Examples include budget utilization (\"85% of your monthly shopping budget used\"), behavioral patterns (\"4th delivery order this week\"), social comparison (\"spending 2.3x your weekly average\"), and loss framing (\"equivalent to 2.5 hours of work\"). The AI selects the framing most likely to be effective for that user's pattern, learning from which messages correlate with reconsideration decisions."),
+        numbered(1, "Dynamic Delay Calibration:", "The AI determines how long to pause based on purchase amount, spending category, velocity, deviation from the user's baseline, and time of day. A routine grocery purchase might get a 10-second pause. An out-of-pattern discretionary purchase gets a 24-hour hold. The delay is scaled to the situation, not applied uniformly across all transactions."),
+        numbered(2, "Personalized Insight Generation:", "During the pause, the AI displays 1-2 pieces of context from the user's own transaction history - for example: 'You have used 85% of your shopping budget this month,' '4th delivery order this week,' or 'At your salary, this is about 2.5 hours of work.' The model tracks which message types are associated with a change in decision, and adjusts its framing over time."),
         spacer(),
 
         // User Flow
         heading("User Flow / Experience"),
-        body("The behavioral intervention is embedded at the highest-stakes moment, the payment decision itself:"),
+        body("The intervention activates at the point of payment:"),
         spacer(),
         ...[
           ["1.", "The user initiates a digital payment (in-app, mobile wallet, or browser checkout)."],
-          ["2.", "The Rethink overlay appears immediately, intercepting the payment confirmation."],
-          ["3.", "A countdown timer displays the AI-determined delay duration, alongside a personalized insight card."],
-          ["4.", "The user is presented with three options: Complete Payment (available after delay), Save to 24-Hour Wishlist, or Cancel."],
-          ["5.", "If the user saves to the wishlist, a re-evaluation prompt is sent after 24 hours, by which time the immediate impulse has typically dissipated."],
-          ["6.", "The user's decision is logged and fed back into the AI model, continuously improving calibration and messaging for future interventions."],
+          ["2.", "The Rethink overlay appears immediately, before payment confirmation."],
+          ["3.", "A countdown timer shows the AI-determined delay, alongside a personalized insight card."],
+          ["4.", "The user sees three options: Complete Payment (available after the delay), Save to 24-Hour Wishlist, or Cancel."],
+          ["5.", "If saved to the wishlist, a re-evaluation prompt arrives after 24 hours - by which point the immediate impulse has usually passed."],
+          ["6.", "The decision is logged and fed back into the AI model, improving calibration for that user's future interactions."],
         ].map(([n, t]) => new Paragraph({
           spacing: { before: 60, after: 60 },
           indent: { left: dxa(0.25) },
@@ -275,7 +275,7 @@ const doc = new Document({
           ]
         })),
         spacer(),
-        body("The flow is designed so the behavioral intervention feels like a helpful assistant, not a blocker, maintaining user autonomy while systematically engaging reflective processing at the critical moment.", { justify: true }),
+        body("The design preserves user choice throughout: payment is never blocked, only delayed. The goal is to give the reflective system time to catch up with the impulse, not to prevent the purchase.", { justify: true }),
         spacer(),
 
         // Success Metrics
@@ -286,7 +286,7 @@ const doc = new Document({
         bodyBold("Secondary Metric - Financial Wellbeing Score: ", "Monthly user-reported satisfaction with spending behavior (1-10 scale). Target: statistically significant improvement at 90 days."),
         bodyBold("Behavioral Metric - Spending Trend: ", "Aggregate discretionary spending change in connected accounts over a 90-day intervention period versus a matched control group."),
         bodyBold("Experimental Design - A/B Test: ", "8-week randomized trial comparing the full Rethink intervention (delay + AI insight) against: a control condition (no friction) and a partial condition (delay only, no AI personalization). This design isolates the contribution of the AI layer."),
-        bodyBold("Adaptation: ", "Insights from A/B testing will inform monthly model updates, adjusting delay thresholds, refining insight framing, and personalizing trigger conditions based on cohort-level response patterns."),
+        bodyBold("Adaptation: ", "A/B results will feed into monthly model updates, primarily threshold adjustments and message framing changes based on what actually shifted decisions."),
         spacer(),
 
         // References (new page)
