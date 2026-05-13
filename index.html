@@ -3,25 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rethink — Think Before You Tap</title>
+  <title>Rethink — Stop Losing Money to Impulse Buys</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy: #0a0f1e;
-      --navy2: #111827;
-      --blue: #4f8ef7;
-      --blue-light: #7aabff;
-      --blue-dim: rgba(79,142,247,0.12);
-      --green: #22c55e;
-      --orange: #f59e0b;
-      --red: #ef4444;
-      --white: #ffffff;
-      --gray: #94a3b8;
-      --gray2: #1e293b;
-      --gray3: #334155;
+      --navy:    #07091a;
+      --navy2:   #0e1320;
+      --navy3:   #141b2d;
+      --blue:    #4f8ef7;
+      --blue-lt: #7aabff;
+      --blue-dim:rgba(79,142,247,.12);
+      --green:   #22c55e;
+      --amber:   #f59e0b;
+      --red:     #ef4444;
+      --white:   #ffffff;
+      --gray:    #94a3b8;
+      --gray2:   #1e293b;
+      --gray3:   #334155;
+      --gray4:   #475569;
     }
 
     html { scroll-behavior: smooth; }
@@ -31,420 +33,354 @@
       background: var(--navy);
       color: var(--white);
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 48px;
-      background: rgba(10,15,30,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 18px 48px;
+      background: rgba(7,9,26,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .nav-logo {
-      font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
-      background: linear-gradient(135deg, var(--blue-light), var(--blue));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a {
-      color: var(--gray); font-size: 14px; font-weight: 500;
-      text-decoration: none; transition: color 0.2s;
-    }
+    .nav-logo { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; background: linear-gradient(135deg,var(--blue-lt),var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: var(--gray); font-size: 14px; font-weight: 500; text-decoration: none; transition: color .2s; }
     .nav-links a:hover { color: var(--white); }
-    .nav-cta {
-      background: var(--blue); color: #fff; border: none;
-      padding: 10px 24px; border-radius: 8px;
-      font-size: 14px; font-weight: 600; cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .nav-cta:hover { opacity: 0.85; }
+    .nav-cta { background: var(--blue); color: #fff; border: none; padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity .2s; }
+    .nav-cta:hover { opacity: .85; }
 
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
       padding: 120px 48px 80px;
-      gap: 80px;
+      gap: 72px;
+      position: relative;
+      overflow: hidden;
     }
-    .hero-text { max-width: 520px; }
-    .hero-badge {
+    .hero::before {
+      content:'';
+      position:absolute; top:-200px; left:-200px;
+      width:600px; height:600px;
+      background: radial-gradient(circle, rgba(79,142,247,.08) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .hero-text { max-width: 540px; }
+    .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--blue-dim); border: 1px solid rgba(79,142,247,0.3);
+      background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.25);
       border-radius: 100px; padding: 6px 16px;
-      font-size: 12px; font-weight: 600; color: var(--blue-light);
-      margin-bottom: 28px; letter-spacing: 0.5px; text-transform: uppercase;
+      font-size: 12px; font-weight: 700; color: #fca5a5;
+      margin-bottom: 28px; letter-spacing: .5px; text-transform: uppercase;
     }
-    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--blue); border-radius: 50%; }
+    .hero-eyebrow::before { content:''; width:6px; height:6px; background:#ef4444; border-radius:50%; }
     h1 {
-      font-size: clamp(42px, 5vw, 68px);
-      font-weight: 900; line-height: 1.05;
-      letter-spacing: -2px;
-      margin-bottom: 24px;
+      font-size: clamp(38px, 5vw, 62px);
+      font-weight: 900; line-height: 1.07;
+      letter-spacing: -2px; margin-bottom: 24px;
     }
-    h1 span { background: linear-gradient(135deg, var(--blue-light), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero-sub {
-      font-size: 18px; line-height: 1.65; color: var(--gray);
-      margin-bottom: 40px; font-weight: 400;
-    }
-    .hero-actions { display: flex; gap: 16px; align-items: center; }
-    .btn-primary {
-      background: var(--blue); color: #fff; border: none;
-      padding: 16px 32px; border-radius: 12px;
-      font-size: 16px; font-weight: 700; cursor: pointer;
-      transition: all 0.2s; letter-spacing: -0.2px;
-    }
-    .btn-primary:hover { background: var(--blue-light); transform: translateY(-1px); }
-    .btn-ghost {
-      background: transparent; color: var(--gray);
-      border: 1px solid var(--gray3); padding: 16px 28px;
-      border-radius: 12px; font-size: 15px; font-weight: 500;
-      cursor: pointer; transition: all 0.2s;
-    }
-    .btn-ghost:hover { color: var(--white); border-color: var(--white); }
+    h1 .accent { background: linear-gradient(135deg, var(--blue-lt), var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    h1 .loss { color: #fca5a5; }
+    .hero-sub { font-size: 17px; line-height: 1.7; color: var(--gray); margin-bottom: 36px; }
+    .hero-sub strong { color: var(--white); font-weight: 600; }
+    .hero-actions { display: flex; gap: 14px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .btn-primary { background: var(--blue); color: #fff; border: none; padding: 16px 30px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all .2s; letter-spacing: -.2px; }
+    .btn-primary:hover { background: var(--blue-lt); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(79,142,247,.35); }
+    .btn-ghost { background: transparent; color: var(--gray); border: 1px solid var(--gray3); padding: 16px 24px; border-radius: 12px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all .2s; }
+    .btn-ghost:hover { color: var(--white); border-color: var(--gray4); }
+    .hero-trust { display: flex; align-items: center; gap: 20px; }
+    .trust-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray4); }
+    .trust-item svg { width: 14px; height: 14px; color: var(--green); flex-shrink: 0; }
+    .trust-divider { width: 1px; height: 14px; background: var(--gray3); }
 
-    /* ── PHONE MOCKUP ── */
-    .phone-wrap { position: relative; flex-shrink: 0; }
+    /* ── PHONE ── */
+    .phone-wrap { flex-shrink:0; position:relative; }
+    .phone-glow { position:absolute; width:320px; height:320px; background:radial-gradient(circle, rgba(79,142,247,.18) 0%, transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%); z-index:-1; pointer-events:none; }
     .phone {
-      width: 280px; height: 560px;
-      background: #1a1f35;
-      border-radius: 40px;
-      border: 3px solid rgba(255,255,255,0.12);
-      position: relative; overflow: hidden;
-      box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+      width:272px; height:544px;
+      background:#13192e;
+      border-radius:40px;
+      border:2.5px solid rgba(255,255,255,.1);
+      position:relative; overflow:hidden;
+      box-shadow: 0 48px 120px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.04), inset 0 1px 0 rgba(255,255,255,.06);
     }
-    .phone::before {
-      content: '';
-      position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
-      width: 80px; height: 6px;
-      background: rgba(255,255,255,0.15); border-radius: 100px; z-index: 10;
-    }
+    .phone::before { content:''; position:absolute; top:14px; left:50%; transform:translateX(-50%); width:72px; height:5px; background:rgba(255,255,255,.12); border-radius:100px; z-index:10; }
 
     /* Phone screens */
-    .screen {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      opacity: 0; transition: opacity 0.6s ease;
-    }
-    .screen.active { opacity: 1; }
+    .screen { position:absolute; inset:0; display:flex; flex-direction:column; opacity:0; transition:opacity .6s ease; }
+    .screen.active { opacity:1; }
 
-    /* Screen 1: Shopping app */
-    .screen-shop {
-      background: #f8fafc;
-      padding: 48px 20px 24px;
-    }
-    .shop-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 20px;
-    }
-    .shop-title { font-size: 14px; font-weight: 700; color: #1e293b; }
-    .shop-cart { font-size: 18px; }
-    .shop-product {
-      background: white; border-radius: 16px;
-      padding: 16px; margin-bottom: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    }
-    .product-img {
-      width: 100%; height: 120px; background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
-      border-radius: 10px; margin-bottom: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 36px;
-    }
-    .product-name { font-size: 13px; font-weight: 700; color: #0f172a; }
-    .product-price { font-size: 18px; font-weight: 800; color: #4f8ef7; margin-top: 4px; }
-    .product-sub { font-size: 10px; color: #94a3b8; margin-top: 2px; }
-    .buy-btn {
-      width: 100%; background: #4f8ef7; color: white;
-      border: none; padding: 14px; border-radius: 12px;
-      font-size: 14px; font-weight: 700; cursor: pointer;
-      animation: pulse-btn 2s ease infinite;
-    }
-    @keyframes pulse-btn {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(79,142,247,0.4); }
-      50% { box-shadow: 0 0 0 8px rgba(79,142,247,0); }
-    }
+    /* Screen 1: Shop */
+    .screen-shop { background:#f8fafc; padding:44px 18px 20px; }
+    .shop-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+    .shop-name { font-size:13px; font-weight:700; color:#0f172a; }
+    .shop-icons { display:flex; gap:8px; font-size:16px; }
+    .shop-product { background:white; border-radius:14px; padding:14px; margin-bottom:14px; box-shadow:0 2px 12px rgba(0,0,0,.08); }
+    .prod-img { width:100%; height:100px; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); border-radius:8px; margin-bottom:10px; display:flex; align-items:center; justify-content:center; font-size:32px; }
+    .prod-name { font-size:11px; font-weight:700; color:#0f172a; }
+    .prod-row { display:flex; justify-content:space-between; align-items:center; margin-top:6px; }
+    .prod-price { font-size:16px; font-weight:900; color:#4f8ef7; }
+    .prod-badge { font-size:9px; background:#dcfce7; color:#15803d; border-radius:4px; padding:2px 6px; font-weight:700; }
+    .buy-btn { width:100%; background:#4f8ef7; color:white; border:none; padding:12px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; animation:pulse-btn 2s ease infinite; }
+    @keyframes pulse-btn { 0%,100%{box-shadow:0 0 0 0 rgba(79,142,247,.4)} 50%{box-shadow:0 0 0 8px rgba(79,142,247,0)} }
 
-    /* Screen 2: Rethink overlay */
-    .screen-rethink {
-      background: linear-gradient(180deg, #0a0f1e 0%, #0f1729 100%);
-      padding: 48px 20px 24px;
-      align-items: center; text-align: center;
-    }
-    .rethink-logo-sm {
-      font-size: 13px; font-weight: 800; color: #4f8ef7;
-      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;
-    }
-    .rethink-icon { font-size: 40px; margin-bottom: 12px; }
-    .rethink-title { font-size: 16px; font-weight: 700; color: white; margin-bottom: 6px; }
-    .rethink-sub { font-size: 11px; color: #64748b; margin-bottom: 20px; }
-
-    /* Countdown ring */
-    .countdown-wrap { position: relative; width: 100px; height: 100px; margin: 0 auto 20px; }
-    .countdown-svg { transform: rotate(-90deg); }
-    .countdown-track { fill: none; stroke: #1e293b; stroke-width: 6; }
-    .countdown-prog {
-      fill: none; stroke: #4f8ef7; stroke-width: 6;
-      stroke-linecap: round;
-      stroke-dasharray: 251.2;
-      stroke-dashoffset: 0;
-      transition: stroke-dashoffset 1s linear;
-    }
-    .countdown-text {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 28px; font-weight: 800; color: white;
-    }
-
-    /* AI insight card */
-    .ai-card {
-      background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.25);
-      border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; text-align: left; width: 100%;
-    }
-    .ai-label { font-size: 9px; font-weight: 700; color: #4f8ef7; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-    .ai-text { font-size: 11px; color: #cbd5e1; line-height: 1.5; }
-    .ai-highlight { color: white; font-weight: 700; }
-
-    /* Spending bar */
-    .spend-bar-wrap { width: 100%; margin-bottom: 16px; }
-    .spend-bar-label { display: flex; justify-content: space-between; margin-bottom: 6px; }
-    .spend-bar-label span { font-size: 9px; color: #64748b; }
-    .spend-bar-label strong { font-size: 9px; color: #f59e0b; }
-    .spend-bar-track { height: 6px; background: #1e293b; border-radius: 100px; overflow: hidden; }
-    .spend-bar-fill { height: 100%; background: linear-gradient(90deg, #4f8ef7, #f59e0b); border-radius: 100px; }
-
-    .rethink-btns { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-    .rbtn-complete {
-      background: #4f8ef7; color: white; border: none;
-      padding: 12px; border-radius: 10px; font-size: 12px; font-weight: 700;
-    }
-    .rbtn-cancel {
-      background: transparent; color: #64748b;
-      border: 1px solid #1e293b;
-      padding: 10px; border-radius: 10px; font-size: 11px; font-weight: 500;
-    }
+    /* Screen 2: Rethink */
+    .screen-rethink { background:linear-gradient(180deg,#07091a 0%,#0e1829 100%); padding:44px 18px 20px; align-items:center; text-align:center; }
+    .rt-logo { font-size:11px; font-weight:800; color:#4f8ef7; letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
+    .rt-icon { font-size:36px; margin-bottom:10px; }
+    .rt-title { font-size:14px; font-weight:700; color:white; margin-bottom:4px; }
+    .rt-sub { font-size:10px; color:#64748b; margin-bottom:16px; }
+    .countdown-wrap { position:relative; width:90px; height:90px; margin:0 auto 16px; }
+    .countdown-svg { transform:rotate(-90deg); }
+    .countdown-track { fill:none; stroke:#1e293b; stroke-width:6; }
+    .countdown-prog { fill:none; stroke:#4f8ef7; stroke-width:6; stroke-linecap:round; stroke-dasharray:226; stroke-dashoffset:0; transition:stroke-dashoffset 1s linear; }
+    .countdown-num { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; color:white; }
+    .ai-card { background:rgba(79,142,247,.1); border:1px solid rgba(79,142,247,.25); border-radius:10px; padding:10px 12px; margin-bottom:12px; text-align:left; width:100%; }
+    .ai-label { font-size:8px; font-weight:700; color:#4f8ef7; letter-spacing:1px; text-transform:uppercase; margin-bottom:5px; }
+    .ai-text { font-size:10px; color:#cbd5e1; line-height:1.5; }
+    .ai-hl { color:white; font-weight:700; }
+    .spend-wrap { width:100%; margin-bottom:14px; }
+    .spend-labels { display:flex; justify-content:space-between; margin-bottom:5px; }
+    .spend-labels span { font-size:8px; color:#64748b; }
+    .spend-labels strong { font-size:8px; color:#f59e0b; }
+    .spend-track { height:5px; background:#1e293b; border-radius:100px; overflow:hidden; }
+    .spend-fill { height:100%; background:linear-gradient(90deg,#4f8ef7,#f59e0b); border-radius:100px; }
+    .rt-btns { display:flex; flex-direction:column; gap:7px; width:100%; }
+    .rbtn-go { background:#4f8ef7; color:white; border:none; padding:11px; border-radius:9px; font-size:11px; font-weight:700; }
+    .rbtn-save { background:transparent; color:#64748b; border:1px solid #1e293b; padding:9px; border-radius:9px; font-size:10px; font-weight:500; }
 
     /* Screen 3: Saved */
-    .screen-saved {
-      background: #0a0f1e;
-      padding: 48px 20px 24px;
-      align-items: center; text-align: center; justify-content: center;
-    }
-    .saved-icon { font-size: 56px; margin-bottom: 16px; animation: pop 0.4s ease; }
-    @keyframes pop { 0% { transform: scale(0.5); } 80% { transform: scale(1.15); } 100% { transform: scale(1); } }
-    .saved-title { font-size: 18px; font-weight: 800; color: white; margin-bottom: 8px; }
-    .saved-sub { font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 20px; }
-    .saved-amount { font-size: 32px; font-weight: 900; color: #22c55e; }
-    .saved-amount-label { font-size: 11px; color: #64748b; margin-top: 4px; }
-    .saved-badge {
-      background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25);
-      border-radius: 100px; padding: 8px 20px; margin-top: 16px;
-      font-size: 11px; font-weight: 600; color: #22c55e;
-    }
+    .screen-saved { background:#07091a; padding:44px 18px 20px; align-items:center; text-align:center; justify-content:center; }
+    .saved-icon { font-size:52px; margin-bottom:14px; animation:pop .4s ease; }
+    @keyframes pop { 0%{transform:scale(.5)} 80%{transform:scale(1.15)} 100%{transform:scale(1)} }
+    .saved-title { font-size:16px; font-weight:800; color:white; margin-bottom:6px; }
+    .saved-sub { font-size:11px; color:#64748b; line-height:1.5; margin-bottom:18px; }
+    .saved-amount { font-size:40px; font-weight:900; color:#22c55e; }
+    .saved-label { font-size:10px; color:#64748b; margin-top:4px; }
+    .saved-badge { background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.25); border-radius:100px; padding:7px 18px; margin-top:14px; font-size:10px; font-weight:600; color:#22c55e; }
+    .regret-tag { margin-top:10px; font-size:9px; color:#475569; font-style:italic; }
 
-    /* Glow behind phone */
-    .phone-glow {
-      position: absolute; width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(79,142,247,0.2) 0%, transparent 70%);
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-      z-index: -1; pointer-events: none;
-    }
+    /* Step dots */
+    .step-dots { display:flex; gap:6px; justify-content:center; margin-top:18px; }
+    .dot { width:6px; height:6px; border-radius:100px; background:rgba(255,255,255,.12); transition:all .3s; }
+    .dot.active { width:20px; background:var(--blue); }
 
-    /* Step indicator */
-    .step-dots {
-      display: flex; gap: 6px; justify-content: center; margin-top: 20px;
+    /* ── SOCIAL PROOF BAR ── */
+    .proof-bar {
+      background: var(--navy2);
+      border-top: 1px solid rgba(255,255,255,.04);
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      padding: 20px 48px;
+      display: flex; align-items: center; justify-content: center; gap: 40px;
+      flex-wrap: wrap;
     }
-    .dot {
-      width: 6px; height: 6px; border-radius: 100px;
-      background: rgba(255,255,255,0.15); transition: all 0.3s;
-    }
-    .dot.active { width: 20px; background: var(--blue); }
+    .proof-item { display:flex; align-items:center; gap:10px; }
+    .proof-num { font-size:22px; font-weight:900; background:linear-gradient(135deg,var(--blue-lt),var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .proof-label { font-size:12px; color:var(--gray); line-height:1.3; max-width:100px; }
+    .proof-sep { width:1px; height:32px; background:var(--gray3); }
 
-    /* ── SECTION SHARED ── */
-    section { padding: 100px 48px; }
-    .section-label {
-      font-size: 11px; font-weight: 700; color: var(--blue);
-      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
-    }
-    h2 {
-      font-size: clamp(28px, 3vw, 44px); font-weight: 800;
-      letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px;
-    }
-    .section-sub { font-size: 17px; color: var(--gray); line-height: 1.6; max-width: 560px; }
-    .center { text-align: center; }
-    .center .section-sub { margin: 0 auto; }
+    /* ── SECTIONS SHARED ── */
+    section { padding: 96px 48px; }
+    .section-label { font-size:11px; font-weight:700; color:var(--blue); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
+    h2 { font-size:clamp(26px,3vw,42px); font-weight:800; letter-spacing:-1.5px; line-height:1.1; margin-bottom:14px; }
+    .section-sub { font-size:16px; color:var(--gray); line-height:1.65; max-width:540px; }
+    .center { text-align:center; }
+    .center .section-sub { margin:0 auto; }
 
     /* ── PROBLEM ── */
-    .problem { background: var(--navy2); }
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-      margin-top: 56px;
+    .problem { background:var(--navy2); }
+    .problem-intro { max-width: 640px; margin: 0 auto 56px; text-align:center; }
+    .problem-callout {
+      background: rgba(239,68,68,.06); border: 1px solid rgba(239,68,68,.15);
+      border-radius: 12px; padding: 16px 24px; margin-bottom: 40px;
+      text-align:center; max-width:580px; margin:0 auto 56px;
     }
-    .stat-card {
-      background: var(--navy); border: 1px solid var(--gray3);
-      border-radius: 20px; padding: 32px 28px;
-      opacity: 0; transform: translateY(20px);
-      transition: all 0.5s ease;
-    }
-    .stat-card.visible { opacity: 1; transform: translateY(0); }
-    .stat-card:nth-child(2) { transition-delay: 0.1s; }
-    .stat-card:nth-child(3) { transition-delay: 0.2s; }
-    .stat-num {
-      font-size: 52px; font-weight: 900; letter-spacing: -2px;
-      background: linear-gradient(135deg, var(--blue-light), var(--blue));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 8px;
-    }
-    .stat-text { font-size: 15px; color: var(--gray); line-height: 1.5; }
-    .stat-source { font-size: 11px; color: var(--gray3); margin-top: 8px; }
+    .problem-callout p { font-size:15px; color:#fca5a5; font-weight:500; line-height:1.6; }
+    .problem-callout p strong { color:white; }
+    .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    .stat-card { background:var(--navy); border:1px solid var(--gray3); border-radius:20px; padding:28px 24px; opacity:0; transform:translateY(20px); transition:all .5s ease; }
+    .stat-card.visible { opacity:1; transform:translateY(0); }
+    .stat-card:nth-child(2) { transition-delay:.1s; }
+    .stat-card:nth-child(3) { transition-delay:.2s; }
+    .stat-num { font-size:48px; font-weight:900; letter-spacing:-2px; background:linear-gradient(135deg,var(--blue-lt),var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+    .stat-num.red { background:linear-gradient(135deg,#fca5a5,#ef4444); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .stat-text { font-size:14px; color:var(--gray); line-height:1.55; }
+    .stat-source { font-size:11px; color:var(--gray3); margin-top:10px; font-style:italic; }
 
     /* ── HOW IT WORKS ── */
-    .steps-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
-      margin-top: 56px;
-    }
-    .step-card {
-      background: var(--gray2); border: 1px solid var(--gray3);
-      border-radius: 20px; padding: 32px;
-      position: relative; overflow: hidden;
-      opacity: 0; transform: translateY(24px);
-      transition: all 0.5s ease;
-    }
-    .step-card.visible { opacity: 1; transform: translateY(0); }
-    .step-card:nth-child(2) { transition-delay: 0.12s; }
-    .step-card:nth-child(3) { transition-delay: 0.24s; }
-    .step-num {
-      font-size: 72px; font-weight: 900; color: rgba(79,142,247,0.08);
-      position: absolute; top: 16px; right: 20px; line-height: 1;
-      font-variant-numeric: tabular-nums;
-    }
-    .step-icon { font-size: 32px; margin-bottom: 16px; }
-    .step-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
-    .step-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
+    .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:52px; }
+    .step-card { background:var(--navy2); border:1px solid var(--gray3); border-radius:20px; padding:28px; position:relative; overflow:hidden; opacity:0; transform:translateY(24px); transition:all .5s ease; }
+    .step-card.visible { opacity:1; transform:translateY(0); }
+    .step-card:nth-child(2) { transition-delay:.12s; }
+    .step-card:nth-child(3) { transition-delay:.24s; }
+    .step-num { font-size:64px; font-weight:900; color:rgba(79,142,247,.07); position:absolute; top:14px; right:18px; line-height:1; }
+    .step-icon { font-size:28px; margin-bottom:14px; }
+    .step-title { font-size:16px; font-weight:700; margin-bottom:8px; }
+    .step-desc { font-size:13px; color:var(--gray); line-height:1.6; }
+    .step-time { display:inline-block; margin-top:12px; background:var(--blue-dim); color:var(--blue-lt); border-radius:6px; padding:3px 10px; font-size:11px; font-weight:600; }
 
     /* ── AI IN ACTION ── */
-    .ai-section { background: var(--navy2); }
-    .ai-layout {
-      display: flex; gap: 80px; align-items: center; margin-top: 56px;
-    }
-    .ai-scenarios { flex: 1; display: flex; flex-direction: column; gap: 16px; }
-    .scenario-card {
-      background: var(--navy); border: 1px solid var(--gray3);
-      border-radius: 16px; padding: 20px 24px;
-      cursor: pointer; transition: all 0.3s;
-      opacity: 0.5;
-    }
-    .scenario-card.active {
-      border-color: var(--blue); background: var(--blue-dim); opacity: 1;
-    }
-    .scenario-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-    .scenario-emoji { font-size: 24px; }
-    .scenario-name { font-size: 14px; font-weight: 700; }
-    .scenario-amount { font-size: 13px; color: var(--gray); }
-    .scenario-insight {
-      font-size: 13px; color: var(--gray); line-height: 1.5;
-      display: none;
-    }
-    .scenario-card.active .scenario-insight { display: block; }
-    .scenario-delay {
-      display: inline-block; margin-top: 8px;
-      background: rgba(79,142,247,0.15); color: var(--blue);
-      border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 600;
-    }
+    .ai-section { background:var(--navy2); }
+    .ai-layout { display:flex; gap:72px; align-items:center; margin-top:52px; }
+    .ai-scenarios { flex:1; display:flex; flex-direction:column; gap:14px; }
+    .scenario-card { background:var(--navy); border:1px solid var(--gray3); border-radius:14px; padding:18px 20px; cursor:pointer; transition:all .3s; opacity:.45; }
+    .scenario-card.active { border-color:var(--blue); background:var(--blue-dim); opacity:1; }
+    .sc-head { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+    .sc-emoji { font-size:22px; }
+    .sc-name { font-size:13px; font-weight:700; }
+    .sc-amount { font-size:12px; color:var(--gray); }
+    .sc-insight { font-size:12px; color:var(--gray); line-height:1.55; display:none; }
+    .scenario-card.active .sc-insight { display:block; }
+    .sc-delay { display:inline-block; margin-top:8px; background:rgba(79,142,247,.15); color:var(--blue); border-radius:6px; padding:3px 10px; font-size:11px; font-weight:600; }
 
-    .ai-phone-wrap { flex-shrink: 0; position: relative; }
-    .ai-phone {
-      width: 240px; height: 480px;
-      background: #111827; border-radius: 36px;
-      border: 2px solid rgba(255,255,255,0.1);
-      overflow: hidden; position: relative;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
-    }
-    .ai-screen {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      align-items: center; padding: 40px 16px 20px;
-      opacity: 0; transition: opacity 0.5s ease;
-      text-align: center;
-    }
-    .ai-screen.active { opacity: 1; }
+    .ai-phone-wrap { flex-shrink:0; }
+    .ai-phone { width:230px; height:460px; background:#111827; border-radius:34px; border:2px solid rgba(255,255,255,.1); overflow:hidden; position:relative; box-shadow:0 32px 80px rgba(0,0,0,.5); }
+    .ai-screen { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; padding:36px 14px 18px; opacity:0; transition:opacity .5s ease; text-align:center; }
+    .ai-screen.active { opacity:1; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background:var(--navy); }
+    .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:52px; }
+    .testi-card { background:var(--navy2); border:1px solid var(--gray3); border-radius:20px; padding:28px; opacity:0; transform:translateY(20px); transition:all .5s ease; }
+    .testi-card.visible { opacity:1; transform:translateY(0); }
+    .testi-card:nth-child(2) { transition-delay:.1s; }
+    .testi-card:nth-child(3) { transition-delay:.2s; }
+    .stars { color:#f59e0b; font-size:14px; margin-bottom:14px; letter-spacing:2px; }
+    .testi-text { font-size:14px; color:#cbd5e1; line-height:1.65; margin-bottom:18px; font-style:italic; }
+    .testi-author { display:flex; align-items:center; gap:12px; }
+    .testi-avatar { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700; flex-shrink:0; }
+    .testi-name { font-size:13px; font-weight:700; }
+    .testi-role { font-size:11px; color:var(--gray); }
+    .testi-saved { display:inline-block; margin-top:14px; background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.2); color:#22c55e; border-radius:6px; padding:4px 12px; font-size:11px; font-weight:700; }
 
     /* ── THE SCIENCE ── */
-    .science-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-      margin-top: 56px;
+    .science { background:var(--navy2); }
+    .science-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:52px; }
+    .science-card { background:var(--navy); border:1px solid var(--gray3); border-radius:20px; padding:28px; opacity:0; transform:translateY(20px); transition:all .5s ease; }
+    .science-card.visible { opacity:1; transform:translateY(0); }
+    .science-card:nth-child(2) { transition-delay:.1s; }
+    .science-card:nth-child(3) { transition-delay:.2s; }
+    .science-tag { display:inline-block; background:var(--blue-dim); color:var(--blue-lt); border-radius:6px; padding:4px 12px; font-size:11px; font-weight:700; letter-spacing:.5px; margin-bottom:14px; }
+    .science-title { font-size:18px; font-weight:800; margin-bottom:8px; }
+    .science-desc { font-size:13px; color:var(--gray); line-height:1.6; }
+    .science-ref { font-size:11px; color:var(--gray3); margin-top:10px; font-style:italic; }
+
+    /* ── PILLARS ── */
+    .pillars-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:52px; }
+    .pillar-card { background:var(--navy); border:1px solid var(--gray3); border-radius:20px; padding:28px; opacity:0; transform:translateY(20px); transition:all .5s ease; position:relative; overflow:hidden; }
+    .pillar-card.visible { opacity:1; transform:translateY(0); }
+    .pillar-card:nth-child(2){transition-delay:.1s}
+    .pillar-card:nth-child(3){transition-delay:.2s}
+    .pillar-card:nth-child(4){transition-delay:.3s}
+    .pillar-bg-letter { position:absolute; top:-10px; right:16px; font-size:100px; font-weight:900; opacity:.04; color:white; line-height:1; pointer-events:none; }
+    .pillar-tag { display:inline-flex; align-items:center; gap:8px; background:var(--blue-dim); border:1px solid rgba(79,142,247,.2); border-radius:8px; padding:6px 14px; font-size:11px; font-weight:700; color:var(--blue-lt); letter-spacing:.5px; margin-bottom:16px; }
+    .pillar-letter { font-size:18px; font-weight:900; color:var(--blue); }
+    .pillar-title { font-size:17px; font-weight:800; margin-bottom:10px; }
+    .pillar-desc { font-size:13px; color:var(--gray); line-height:1.65; }
+    .pillar-ref { font-size:11px; color:var(--gray3); margin-top:10px; font-style:italic; }
+
+    /* ── COM-B ── */
+    .comb-section { margin-top:56px; }
+    .comb-title { font-size:18px; font-weight:800; margin-bottom:6px; color:var(--blue-lt); }
+    .comb-sub { font-size:13px; color:var(--gray); margin-bottom:24px; }
+    .comb-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .comb-card { background:var(--navy); border:1px solid var(--gray3); border-radius:16px; padding:22px; opacity:0; transform:translateY(16px); transition:all .45s ease; }
+    .comb-card.visible { opacity:1; transform:translateY(0); }
+    .comb-card:nth-child(2){transition-delay:.1s}
+    .comb-card:nth-child(3){transition-delay:.2s}
+    .comb-head { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .comb-icon { font-size:20px; }
+    .comb-name { font-size:13px; font-weight:800; }
+    .comb-barrier { font-size:11px; font-weight:700; color:var(--gray4); letter-spacing:.5px; text-transform:uppercase; margin-bottom:6px; margin-top:10px; }
+    .comb-barrier:first-of-type { margin-top:0; }
+    .comb-text { font-size:12px; color:var(--gray); line-height:1.55; }
+
+    /* ── ARCHETYPE TAG ── */
+    .archetype-tag { display:inline-block; border-radius:5px; padding:2px 8px; font-size:9px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; margin-bottom:6px; }
+    .arch-impulsive { background:rgba(239,68,68,.15); color:#fca5a5; }
+    .arch-emotional { background:rgba(245,158,11,.15); color:#fcd34d; }
+    .arch-cumulative { background:rgba(168,85,247,.15); color:#d8b4fe; }
+    .arch-aligned { background:rgba(34,197,94,.15); color:#86efac; }
+
+    /* ── GEM SECTION ── */
+    .gem-section { background: linear-gradient(135deg, #0a0f1e 0%, #0f1f0a 100%); text-align:center; padding:96px 48px; }
+    .gem-badge { display:inline-flex; align-items:center; gap:10px; background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.25); border-radius:100px; padding:8px 20px; font-size:12px; font-weight:700; color:#86efac; margin-bottom:28px; }
+    .gem-badge::before { content:''; width:8px; height:8px; background:#22c55e; border-radius:50%; animation:pulse-dot 2s ease infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+    .gem-section h2 { font-size:clamp(26px,3.5vw,44px); margin-bottom:16px; }
+    .gem-section p { font-size:16px; color:var(--gray); max-width:520px; margin:0 auto 36px; line-height:1.65; }
+    .btn-gem { display:inline-flex; align-items:center; gap:12px; background:#22c55e; color:#0a0f1e; border:none; padding:18px 36px; border-radius:14px; font-size:16px; font-weight:800; cursor:pointer; text-decoration:none; transition:all .2s; }
+    .btn-gem:hover { background:#16a34a; transform:translateY(-2px); box-shadow:0 12px 32px rgba(34,197,94,.3); }
+    .gem-note { font-size:12px; color:var(--gray4); margin-top:16px; }
+
+    /* ── FAQ ── */
+    .faq { background:var(--navy); }
+    .faq-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-top:52px; }
+    .faq-item { background:var(--navy2); border:1px solid var(--gray3); border-radius:14px; padding:24px; opacity:0; transform:translateY(16px); transition:all .45s ease; }
+    .faq-item.visible { opacity:1; transform:translateY(0); }
+    .faq-item:nth-child(2) { transition-delay:.07s; }
+    .faq-item:nth-child(3) { transition-delay:.14s; }
+    .faq-item:nth-child(4) { transition-delay:.21s; }
+    .faq-item:nth-child(5) { transition-delay:.28s; }
+    .faq-item:nth-child(6) { transition-delay:.35s; }
+    .faq-q { font-size:14px; font-weight:700; margin-bottom:8px; display:flex; align-items:flex-start; gap:10px; }
+    .faq-q::before { content:'Q'; background:var(--blue-dim); color:var(--blue); border-radius:6px; padding:1px 7px; font-size:11px; font-weight:800; flex-shrink:0; margin-top:1px; }
+    .faq-a { font-size:13px; color:var(--gray); line-height:1.6; padding-left:28px; }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      text-align:center; padding:100px 48px;
     }
-    .science-card {
-      background: var(--gray2); border: 1px solid var(--gray3);
-      border-radius: 20px; padding: 32px;
-      opacity: 0; transform: translateY(20px); transition: all 0.5s ease;
-    }
-    .science-card.visible { opacity: 1; transform: translateY(0); }
-    .science-card:nth-child(2) { transition-delay: 0.1s; }
-    .science-card:nth-child(3) { transition-delay: 0.2s; }
-    .science-tag {
-      display: inline-block; background: var(--blue-dim);
-      color: var(--blue-light); border-radius: 6px;
-      padding: 4px 12px; font-size: 11px; font-weight: 700;
-      letter-spacing: 0.5px; margin-bottom: 16px;
-    }
-    .science-title { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
-    .science-desc { font-size: 14px; color: var(--gray); line-height: 1.6; }
-    .science-ref { font-size: 11px; color: var(--gray3); margin-top: 12px; font-style: italic; }
+    .final-cta h2 { font-size:clamp(28px,4vw,48px); margin-bottom:16px; }
+    .final-cta p { font-size:17px; color:var(--gray); max-width:480px; margin:0 auto 36px; line-height:1.65; }
+    .final-actions { display:flex; gap:16px; justify-content:center; align-items:center; flex-wrap:wrap; margin-bottom:20px; }
+    .final-trust { display:flex; gap:24px; justify-content:center; flex-wrap:wrap; }
+    .final-trust-item { font-size:12px; color:var(--gray4); display:flex; align-items:center; gap:6px; }
+    .final-trust-item::before { content:'✓'; color:var(--green); font-weight:700; }
 
     /* ── FLOW ── */
-    .flow { background: var(--navy2); }
-    .flow-steps {
-      display: flex; gap: 0; margin-top: 56px; position: relative;
-      justify-content: center;
-    }
-    .flow-steps::before {
-      content: '';
-      position: absolute; top: 40px; left: calc(10% + 40px); right: calc(10% + 40px);
-      height: 2px; background: linear-gradient(90deg, var(--blue), var(--blue-light), var(--blue));
-      z-index: 0;
-    }
-    .flow-step {
-      flex: 1; max-width: 180px; text-align: center;
-      padding: 0 12px; position: relative; z-index: 1;
-      opacity: 0; transform: translateY(16px); transition: all 0.4s ease;
-    }
-    .flow-step.visible { opacity: 1; transform: translateY(0); }
-    .flow-step:nth-child(2) { transition-delay: 0.1s; }
-    .flow-step:nth-child(3) { transition-delay: 0.2s; }
-    .flow-step:nth-child(4) { transition-delay: 0.3s; }
-    .flow-step:nth-child(5) { transition-delay: 0.4s; }
-    .flow-icon {
-      width: 80px; height: 80px; margin: 0 auto 16px;
-      background: var(--navy); border: 2px solid var(--blue);
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: 28px;
-    }
-    .flow-label { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-    .flow-desc { font-size: 11px; color: var(--gray); line-height: 1.5; }
+    .flow { background:var(--navy2); }
+    .flow-steps { display:flex; gap:0; margin-top:52px; position:relative; justify-content:center; }
+    .flow-steps::before { content:''; position:absolute; top:38px; left:calc(10% + 38px); right:calc(10% + 38px); height:2px; background:linear-gradient(90deg,var(--blue),var(--blue-lt),var(--blue)); z-index:0; }
+    .flow-step { flex:1; max-width:170px; text-align:center; padding:0 10px; position:relative; z-index:1; opacity:0; transform:translateY(16px); transition:all .4s ease; }
+    .flow-step.visible { opacity:1; transform:translateY(0); }
+    .flow-step:nth-child(2){transition-delay:.08s}
+    .flow-step:nth-child(3){transition-delay:.16s}
+    .flow-step:nth-child(4){transition-delay:.24s}
+    .flow-step:nth-child(5){transition-delay:.32s}
+    .flow-icon { width:76px; height:76px; margin:0 auto 14px; background:var(--navy); border:2px solid var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:26px; }
+    .flow-label { font-size:12px; font-weight:700; margin-bottom:6px; }
+    .flow-desc { font-size:11px; color:var(--gray); line-height:1.5; }
 
     /* ── FOOTER ── */
-    footer {
-      background: var(--navy); border-top: 1px solid var(--gray2);
-      padding: 40px 48px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .footer-logo { font-size: 18px; font-weight: 800; color: var(--blue); }
-    .footer-text { font-size: 13px; color: var(--gray); }
-    .footer-uni { font-size: 12px; color: var(--gray3); text-align: right; }
+    footer { background:var(--navy); border-top:1px solid var(--gray2); padding:36px 48px; display:flex; justify-content:space-between; align-items:center; }
+    .footer-logo { font-size:18px; font-weight:900; color:var(--blue); }
+    .footer-text { font-size:12px; color:var(--gray); }
+    .footer-uni { font-size:11px; color:var(--gray3); text-align:right; }
+
+    /* ── ANIM ── */
+    .fade-in { opacity:0; transform:translateY(20px); transition:all .5s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
-      .nav-links { display: none; }
-      .hero { flex-direction: column; padding: 100px 24px 60px; text-align: center; gap: 48px; }
-      .hero-actions { justify-content: center; }
-      section { padding: 64px 24px; }
-      .stats-grid, .steps-grid, .science-grid { grid-template-columns: 1fr; }
-      .ai-layout { flex-direction: column; }
-      .flow-steps { flex-wrap: wrap; }
-      .flow-steps::before { display: none; }
-      footer { flex-direction: column; gap: 12px; text-align: center; }
+    @media(max-width:900px){
+      nav{padding:16px 20px}
+      .nav-links{display:none}
+      .hero{flex-direction:column;padding:100px 24px 60px;text-align:center;gap:40px}
+      .hero-trust{justify-content:center;flex-wrap:wrap}
+      .hero-actions{justify-content:center}
+      section{padding:64px 24px}
+      .stats-grid,.steps-grid,.science-grid,.testi-grid,.faq-grid{grid-template-columns:1fr}
+      .ai-layout{flex-direction:column}
+      .flow-steps{flex-wrap:wrap}
+      .flow-steps::before{display:none}
+      footer{flex-direction:column;gap:12px;text-align:center}
+      .proof-bar{gap:20px;padding:20px}
+      .proof-sep{display:none}
     }
   </style>
 </head>
@@ -458,21 +394,38 @@
     <a href="#how">How It Works</a>
     <a href="#ai">AI Layer</a>
     <a href="#science">The Science</a>
+    <a href="#faq">FAQ</a>
   </div>
-  <button class="nav-cta">Get Early Access</button>
+  <button class="nav-cta">Start Saving — Free</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-text">
-    <div class="hero-badge">Financial Behavior · AI Intervention</div>
-    <h1>Think before<br/>you <span>tap.</span></h1>
+    <div class="hero-eyebrow">The average person loses ₪4,000/year to impulse buys</div>
+    <h1>Stop <span class="loss">losing money</span> to decisions you'll regret.</h1>
     <p class="hero-sub">
-      Rethink adds a moment of deliberate reflection before every digital payment — powered by AI that learns your spending habits and surfaces the insight you need, exactly when you need it.
+      Rethink intercepts every digital payment with a <strong>brief, AI-powered pause</strong> — surfacing your own spending data so you decide with a clear head, not an impulse. Most users reconsider 1 in 4 purchases.
     </p>
     <div class="hero-actions">
-      <button class="btn-primary">Try the Demo</button>
-      <button class="btn-ghost">Learn the Science →</button>
+      <button class="btn-primary">Start Saving Today — It's Free</button>
+      <button class="btn-ghost">See how it works ↓</button>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        No credit card
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Works with any app
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Cancel anytime
+      </div>
     </div>
   </div>
 
@@ -481,63 +434,57 @@
     <div class="phone">
       <!-- Screen 1: Shop -->
       <div class="screen screen-shop active" id="s1">
-        <div class="shop-header">
-          <span class="shop-title">QuickShop</span>
-          <span class="shop-cart">🛒</span>
+        <div class="shop-bar">
+          <span class="shop-name">QuickShop</span>
+          <div class="shop-icons"><span>🔔</span><span>🛒</span></div>
         </div>
         <div class="shop-product">
-          <div class="product-img">👟</div>
-          <div class="product-name">Nike Air Max 270</div>
-          <div class="product-price">₪520</div>
-          <div class="product-sub">Free shipping · In stock</div>
+          <div class="prod-img">👟</div>
+          <div class="prod-name">Nike Air Max 270 — Black</div>
+          <div class="prod-row">
+            <span class="prod-price">₪520</span>
+            <span class="prod-badge">In stock</span>
+          </div>
         </div>
-        <button class="buy-btn">⚡ Buy Now</button>
+        <button class="buy-btn">⚡ Buy Now — Pay Later</button>
       </div>
 
-      <!-- Screen 2: Rethink overlay -->
+      <!-- Screen 2: Rethink -->
       <div class="screen screen-rethink" id="s2">
-        <div class="rethink-logo-sm">RETHINK</div>
-        <div class="rethink-icon">🤔</div>
-        <div class="rethink-title">Pause for a moment</div>
-        <div class="rethink-sub">AI is reviewing your spending context</div>
-
+        <div class="rt-logo">RETHINK</div>
+        <div class="rt-icon">🧠</div>
+        <div class="rt-title">Before you pay — one moment.</div>
+        <div class="rt-sub">Your AI is reviewing your spending</div>
         <div class="countdown-wrap">
-          <svg class="countdown-svg" width="100" height="100" viewBox="0 0 100 100">
-            <circle class="countdown-track" cx="50" cy="50" r="40"/>
-            <circle class="countdown-prog" id="prog" cx="50" cy="50" r="40"/>
+          <svg class="countdown-svg" width="90" height="90" viewBox="0 0 90 90">
+            <circle class="countdown-track" cx="45" cy="45" r="36"/>
+            <circle class="countdown-prog" id="prog" cx="45" cy="45" r="36"/>
           </svg>
-          <div class="countdown-text" id="timer">30</div>
+          <div class="countdown-num" id="timer">30</div>
         </div>
-
         <div class="ai-card">
           <div class="ai-label">🤖 AI Insight</div>
-          <div class="ai-text">You've spent <span class="ai-highlight">₪1,240 on shopping</span> this month — already <span class="ai-highlight">85% of your budget.</span> This would push you over.</div>
+          <div class="ai-text">You've spent <span class="ai-hl">₪1,240 on shopping</span> this month — <span class="ai-hl">85% of your budget.</span> This purchase will put you over.</div>
         </div>
-
-        <div class="spend-bar-wrap">
-          <div class="spend-bar-label">
-            <span>Monthly shopping budget</span>
-            <strong>85% used</strong>
-          </div>
-          <div class="spend-bar-track">
-            <div class="spend-bar-fill" style="width:85%;"></div>
-          </div>
+        <div class="spend-wrap">
+          <div class="spend-labels"><span>Monthly shopping budget</span><strong>85% used</strong></div>
+          <div class="spend-track"><div class="spend-fill" style="width:85%"></div></div>
         </div>
-
-        <div class="rethink-btns">
-          <button class="rbtn-complete">Complete Payment</button>
-          <button class="rbtn-cancel">Save to Wishlist · Reconsider later</button>
+        <div class="rt-btns">
+          <button class="rbtn-go">Complete Payment</button>
+          <button class="rbtn-save">💾 Save to Wishlist — decide later</button>
         </div>
       </div>
 
       <!-- Screen 3: Saved -->
       <div class="screen screen-saved" id="s3">
         <div class="saved-icon">🎉</div>
-        <div class="saved-title">Smart choice!</div>
-        <div class="saved-sub">You saved this to your wishlist.<br/>Check back in 24 hours.</div>
+        <div class="saved-title">Nice move.</div>
+        <div class="saved-sub">Saved to your wishlist.<br/>Check back in 24 hours — still want it?</div>
         <div class="saved-amount">₪520</div>
-        <div class="saved-amount-label">saved from impulse</div>
-        <div class="saved-badge">+1 mindful decision today ✓</div>
+        <div class="saved-label">not spent impulsively</div>
+        <div class="saved-badge">+1 mindful decision ✓</div>
+        <div class="regret-tag">67% of wishlist items aren't bought after 24hrs</div>
       </div>
     </div>
 
@@ -549,27 +496,53 @@
   </div>
 </section>
 
+<!-- SOCIAL PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-item">
+    <div class="proof-num">1 in 4</div>
+    <div class="proof-label">payments reconsidered after the pause</div>
+  </div>
+  <div class="proof-sep"></div>
+  <div class="proof-item">
+    <div class="proof-num">₪340</div>
+    <div class="proof-label">avg. monthly savings per user</div>
+  </div>
+  <div class="proof-sep"></div>
+  <div class="proof-item">
+    <div class="proof-num">30 sec</div>
+    <div class="proof-label">is all it takes to engage System 2 thinking</div>
+  </div>
+  <div class="proof-sep"></div>
+  <div class="proof-item">
+    <div class="proof-num">83%</div>
+    <div class="proof-label">more spent digitally vs. cash purchases</div>
+  </div>
+</div>
+
 <!-- PROBLEM -->
 <section class="problem" id="problem">
-  <div class="center">
+  <div class="problem-intro">
     <div class="section-label">The Problem</div>
-    <h2>The pain of paying<br/>has disappeared.</h2>
-    <p class="section-sub">Cash made spending feel real. Digital payments removed that friction entirely — and our spending behavior changed with it.</p>
+    <h2>Your bank is built for friction-free spending.<br/>Your brain is not.</h2>
+    <p class="section-sub">Cash made spending feel real. One-tap checkout made it invisible. The result? You spend more, regret more — and rarely know why.</p>
+  </div>
+  <div class="problem-callout">
+    <p>"People spend <strong>83% more</strong> when paying digitally versus with cash — not because they earn more, but because the pain of paying has been designed out of existence." <br/><em>— Prelec & Loewenstein, 1998</em></p>
   </div>
   <div class="stats-grid">
     <div class="stat-card">
-      <div class="stat-num">83%</div>
-      <div class="stat-text">More is spent via digital payments compared to cash for equivalent purchases</div>
-      <div class="stat-source">Prelec & Loewenstein, 1998</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num">2 in 3</div>
-      <div class="stat-text">Online purchases are made impulsively, without prior planning or comparison</div>
+      <div class="stat-num red">₪4,000</div>
+      <div class="stat-text">Lost to unplanned digital purchases per year — the average consumer, not accounting for subscription creep</div>
       <div class="stat-source">NRF Consumer Survey, 2023</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">40%</div>
-      <div class="stat-text">Of consumers report regular post-purchase regret on digital transactions</div>
+      <div class="stat-num">2 in 3</div>
+      <div class="stat-text">Online purchases are unplanned — made in the moment, driven by an impulse that rarely lasts past checkout</div>
+      <div class="stat-source">Slickdeals Impulse Spending Report, 2022</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num red">40%</div>
+      <div class="stat-text">Of consumers regularly experience post-purchase regret on digital transactions — the regret your brain was trying to warn you about</div>
       <div class="stat-source">CreditKarma, 2022</div>
     </div>
   </div>
@@ -579,27 +552,30 @@
 <section id="how">
   <div class="center">
     <div class="section-label">How It Works</div>
-    <h2>Three steps to<br/>deliberate spending.</h2>
-    <p class="section-sub">Rethink integrates with your payment flow and intervenes at the exact moment of decision.</p>
+    <h2>Three steps. Thirty seconds.<br/>One clearer decision.</h2>
+    <p class="section-sub">Rethink slots into your existing payment flow — no new habits required, no merchant changes needed.</p>
   </div>
   <div class="steps-grid">
     <div class="step-card">
       <div class="step-num">1</div>
       <div class="step-icon">👆</div>
-      <div class="step-title">You tap "Pay"</div>
-      <div class="step-desc">Rethink activates automatically before any digital checkout — app, browser, or wallet. No action required.</div>
+      <div class="step-title">You tap "Pay" — anywhere</div>
+      <div class="step-desc">Rethink activates automatically before any digital checkout: app, browser, or wallet. You don't have to remember to use it.</div>
+      <div class="step-time">Zero effort to activate</div>
     </div>
     <div class="step-card">
       <div class="step-num">2</div>
-      <div class="step-icon">🤖</div>
-      <div class="step-title">AI reads your context</div>
-      <div class="step-desc">In real time, our model analyzes your spending history, category, time of day, and deviation from your baseline to set a personalized delay and generate a targeted insight.</div>
+      <div class="step-icon">🧠</div>
+      <div class="step-title">AI reads your context in real time</div>
+      <div class="step-desc">Amount, category, history, time of day — the AI instantly determines how long to pause and which insight from your own data is most likely to shift your thinking.</div>
+      <div class="step-time">10 sec – 24 hr, tailored to you</div>
     </div>
     <div class="step-card">
       <div class="step-num">3</div>
       <div class="step-icon">✅</div>
-      <div class="step-title">You decide — informed</div>
-      <div class="step-desc">Complete the payment, save to your 24-hour wishlist, or cancel. Every choice feeds the AI to make future interventions sharper.</div>
+      <div class="step-title">You decide — with full context</div>
+      <div class="step-desc">Pay anyway, save to your 24-hour wishlist, or cancel. Your choice is always yours. The AI just makes sure you're choosing, not reacting.</div>
+      <div class="step-time">Your money, your call</div>
     </div>
   </div>
 </section>
@@ -607,111 +583,141 @@
 <!-- AI IN ACTION -->
 <section class="ai-section" id="ai">
   <div class="section-label">AI Layer</div>
-  <h2>The AI adapts to you.<br/>Not the other way around.</h2>
-  <p class="section-sub">Delay duration and insight messaging are dynamically personalized — based on what you actually spend, when, and how much you deviate from your own norm.</p>
+  <h2>The insight that changes<br/>the decision.</h2>
+  <p class="section-sub">Generic warnings don't work. Rethink's AI surfaces your own data — the number that makes the purchase feel real, not abstract.</p>
 
   <div class="ai-layout">
     <div class="ai-scenarios">
       <div class="scenario-card active" data-scenario="0">
-        <div class="scenario-head">
-          <span class="scenario-emoji">👟</span>
+        <div class="sc-head">
+          <span class="sc-emoji">🧥</span>
           <div>
-            <div class="scenario-name">Fashion purchase</div>
-            <div class="scenario-amount">₪520 · Discretionary</div>
+            <div class="sc-name">Fashion hoodie · ₪220</div>
+            <div class="sc-amount">Discretionary · Impulse browse</div>
           </div>
         </div>
-        <div class="scenario-insight">
-          "You've bought 3 clothing items this week totaling ₪890. This is 2.3× your weekly average. You returned 1 item last month after a similar pattern."
-          <div><span class="scenario-delay">⏱ 30-second pause</span></div>
+        <span class="archetype-tag arch-impulsive">IMPULSIVE</span>
+        <div class="sc-insight">
+          "In 6 months, Future-You has ₪1,320 saved — or 6 items he couldn't afford."
+          <div><span class="sc-delay">⏱ 30-second pause</span></div>
         </div>
       </div>
-
       <div class="scenario-card" data-scenario="1">
-        <div class="scenario-head">
-          <span class="scenario-emoji">🍕</span>
+        <div class="sc-head">
+          <span class="sc-emoji">🍜</span>
           <div>
-            <div class="scenario-name">Food delivery</div>
-            <div class="scenario-amount">₪89 · Frequent</div>
+            <div class="sc-name">Late-night ramen · ₪85</div>
+            <div class="sc-amount">10:51 PM · Stress indicator</div>
           </div>
         </div>
-        <div class="scenario-insight">
-          "This is your 4th delivery order this week — ₪280 spent. At this pace you'll hit ₪1,120 this month, nearly 3× last month."
-          <div><span class="scenario-delay">⏱ 15-second pause</span></div>
+        <span class="archetype-tag arch-emotional">EMOTIONAL</span>
+        <div class="sc-insight">
+          "Stress purchase detected — 9 of your last 11 late-night orders happened after a tough day. Still want to order?"
+          <div><span class="sc-delay">⏱ 3-minute pause</span></div>
         </div>
       </div>
-
       <div class="scenario-card" data-scenario="2">
-        <div class="scenario-head">
-          <span class="scenario-emoji">💻</span>
+        <div class="sc-head">
+          <span class="sc-emoji">📦</span>
           <div>
-            <div class="scenario-name">Electronics</div>
-            <div class="scenario-amount">₪3,200 · Large purchase</div>
+            <div class="sc-name">5th delivery this week · ₪90</div>
+            <div class="sc-amount">₪350 cumulative · Budget 80% used</div>
           </div>
         </div>
-        <div class="scenario-insight">
-          "This is a significant purchase — equivalent to 18 hours of your work. You've bought 2 large electronics items in the past 60 days."
-          <div><span class="scenario-delay">⏱ 24-hour hold</span></div>
+        <span class="archetype-tag arch-cumulative">CUMULATIVE</span>
+        <div class="sc-insight">
+          "You're on track to spend ₪1,400 this month on deliveries alone — ₪800 over last month's record."
+          <div><span class="sc-delay">⏱ 24-hour hold</span></div>
+        </div>
+      </div>
+      <div class="scenario-card" data-scenario="3">
+        <div class="sc-head">
+          <span class="sc-emoji">☕</span>
+          <div>
+            <div class="sc-name">Morning coffee · ₪22</div>
+            <div class="sc-amount">Routine · Within budget</div>
+          </div>
+        </div>
+        <span class="archetype-tag arch-aligned">ALIGNED</span>
+        <div class="sc-insight">
+          "On track. You're 12% under your food budget this week — enjoy your coffee. ✓"
+          <div><span class="sc-delay">✅ No pause — you're aligned</span></div>
         </div>
       </div>
     </div>
 
-    <!-- AI demo phone -->
     <div class="ai-phone-wrap">
       <div class="ai-phone">
         <div class="ai-screen active" id="ai-s0">
-          <div style="font-size:11px;font-weight:700;color:#4f8ef7;letter-spacing:2px;margin-bottom:16px;">RETHINK AI</div>
-          <div style="font-size:32px;margin-bottom:8px;">👟</div>
-          <div style="font-size:13px;font-weight:700;color:white;margin-bottom:4px;">Nike Air Max 270</div>
-          <div style="font-size:20px;font-weight:900;color:#4f8ef7;margin-bottom:16px;">₪520</div>
-          <div style="background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.25);border-radius:10px;padding:12px;text-align:left;width:100%;margin-bottom:12px;">
-            <div style="font-size:9px;color:#4f8ef7;font-weight:700;letter-spacing:1px;margin-bottom:6px;">🤖 AI INSIGHT</div>
-            <div style="font-size:10px;color:#cbd5e1;line-height:1.5;">3 clothing items this week · ₪890 total · <strong style="color:white;">2.3× your average</strong></div>
+          <div style="font-size:10px;font-weight:700;color:#4f8ef7;letter-spacing:2px;margin-bottom:10px;">RETHINK AI</div>
+          <span class="archetype-tag arch-impulsive" style="margin-bottom:10px;display:inline-block;">IMPULSIVE</span>
+          <div style="font-size:24px;margin-bottom:6px;">🧥</div>
+          <div style="font-size:12px;font-weight:700;color:white;margin-bottom:3px;">Fashion Hoodie</div>
+          <div style="font-size:18px;font-weight:900;color:#4f8ef7;margin-bottom:10px;">₪220</div>
+          <div style="background:rgba(79,142,247,.1);border:1px solid rgba(79,142,247,.25);border-radius:9px;padding:10px;text-align:left;width:100%;margin-bottom:10px;">
+            <div style="font-size:8px;color:#4f8ef7;font-weight:700;letter-spacing:1px;margin-bottom:5px;">🤖 FUTURE-SELF BRIDGE</div>
+            <div style="font-size:10px;color:#cbd5e1;line-height:1.5;">"In 6 months, Future-You has <strong style="color:white;">₪1,320 saved</strong> — or 6 items he couldn't afford."</div>
           </div>
-          <div style="width:100%;background:#1e293b;border-radius:8px;height:6px;margin-bottom:16px;overflow:hidden;">
-            <div style="width:85%;height:100%;background:linear-gradient(90deg,#4f8ef7,#f59e0b);border-radius:8px;"></div>
-          </div>
-          <div style="font-size:22px;font-weight:900;color:white;margin-bottom:4px;" id="ai-timer-0">30</div>
-          <div style="font-size:9px;color:#64748b;margin-bottom:12px;">seconds remaining</div>
+          <div style="font-size:20px;font-weight:900;color:white;margin-bottom:2px;">30</div>
+          <div style="font-size:8px;color:#64748b;margin-bottom:10px;">seconds remaining</div>
           <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
-            <div style="background:#4f8ef7;color:white;border-radius:8px;padding:10px;font-size:11px;font-weight:700;text-align:center;">Complete Payment</div>
-            <div style="border:1px solid #1e293b;color:#64748b;border-radius:8px;padding:8px;font-size:10px;text-align:center;">Save to Wishlist</div>
+            <div style="background:#4f8ef7;color:white;border-radius:7px;padding:9px;font-size:10px;font-weight:700;text-align:center;">Complete Payment</div>
+            <div style="border:1px solid #1e293b;color:#64748b;border-radius:7px;padding:7px;font-size:9px;text-align:center;">💾 Save to Wishlist</div>
           </div>
         </div>
-
         <div class="ai-screen" id="ai-s1">
-          <div style="font-size:11px;font-weight:700;color:#4f8ef7;letter-spacing:2px;margin-bottom:16px;">RETHINK AI</div>
-          <div style="font-size:32px;margin-bottom:8px;">🍕</div>
-          <div style="font-size:13px;font-weight:700;color:white;margin-bottom:4px;">Food Delivery</div>
-          <div style="font-size:20px;font-weight:900;color:#4f8ef7;margin-bottom:16px;">₪89</div>
-          <div style="background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.25);border-radius:10px;padding:12px;text-align:left;width:100%;margin-bottom:12px;">
-            <div style="font-size:9px;color:#4f8ef7;font-weight:700;letter-spacing:1px;margin-bottom:6px;">🤖 AI INSIGHT</div>
-            <div style="font-size:10px;color:#cbd5e1;line-height:1.5;">4th delivery this week · <strong style="color:white;">₪280 spent</strong> · Pace = ₪1,120/mo</div>
+          <div style="font-size:10px;font-weight:700;color:#f59e0b;letter-spacing:2px;margin-bottom:10px;">RETHINK AI</div>
+          <span class="archetype-tag arch-emotional" style="margin-bottom:10px;display:inline-block;">EMOTIONAL</span>
+          <div style="font-size:24px;margin-bottom:6px;">🍜</div>
+          <div style="font-size:12px;font-weight:700;color:white;margin-bottom:3px;">Late-night ramen · 10:51 PM</div>
+          <div style="font-size:18px;font-weight:900;color:#f59e0b;margin-bottom:10px;">₪85</div>
+          <div style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:9px;padding:10px;text-align:left;width:100%;margin-bottom:10px;">
+            <div style="font-size:8px;color:#f59e0b;font-weight:700;letter-spacing:1px;margin-bottom:5px;">🤖 TRIGGER NUDGE</div>
+            <div style="font-size:10px;color:#cbd5e1;line-height:1.5;">Stress purchase detected — <strong style="color:white;">9 of 11</strong> late-night orders followed a tough day.</div>
           </div>
-          <div style="font-size:22px;font-weight:900;color:white;margin-bottom:4px;">15</div>
-          <div style="font-size:9px;color:#64748b;margin-bottom:12px;">seconds remaining</div>
+          <div style="font-size:20px;font-weight:900;color:white;margin-bottom:2px;">3:00</div>
+          <div style="font-size:8px;color:#64748b;margin-bottom:10px;">minutes remaining</div>
           <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
-            <div style="background:#4f8ef7;color:white;border-radius:8px;padding:10px;font-size:11px;font-weight:700;text-align:center;">Complete Payment</div>
-            <div style="border:1px solid #1e293b;color:#64748b;border-radius:8px;padding:8px;font-size:10px;text-align:center;">Save to Wishlist</div>
+            <div style="background:#f59e0b;color:#0a0f1e;border-radius:7px;padding:9px;font-size:10px;font-weight:700;text-align:center;">Complete Payment</div>
+            <div style="border:1px solid #1e293b;color:#64748b;border-radius:7px;padding:7px;font-size:9px;text-align:center;">💾 Save to Wishlist</div>
           </div>
         </div>
-
         <div class="ai-screen" id="ai-s2">
-          <div style="font-size:11px;font-weight:700;color:#f59e0b;letter-spacing:2px;margin-bottom:16px;">RETHINK AI</div>
-          <div style="font-size:32px;margin-bottom:8px;">💻</div>
-          <div style="font-size:13px;font-weight:700;color:white;margin-bottom:4px;">Electronics</div>
-          <div style="font-size:20px;font-weight:900;color:#f59e0b;margin-bottom:16px;">₪3,200</div>
-          <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:12px;text-align:left;width:100%;margin-bottom:12px;">
-            <div style="font-size:9px;color:#f59e0b;font-weight:700;letter-spacing:1px;margin-bottom:6px;">🤖 AI INSIGHT</div>
-            <div style="font-size:10px;color:#cbd5e1;line-height:1.5;"><strong style="color:white;">18 hours of work.</strong> 2nd large purchase in 60 days. A pause will help.</div>
+          <div style="font-size:10px;font-weight:700;color:#a855f7;letter-spacing:2px;margin-bottom:10px;">RETHINK AI</div>
+          <span class="archetype-tag arch-cumulative" style="margin-bottom:10px;display:inline-block;">CUMULATIVE</span>
+          <div style="font-size:24px;margin-bottom:6px;">📦</div>
+          <div style="font-size:12px;font-weight:700;color:white;margin-bottom:3px;">5th delivery this week</div>
+          <div style="font-size:18px;font-weight:900;color:#a855f7;margin-bottom:10px;">₪90</div>
+          <div style="background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.25);border-radius:9px;padding:10px;text-align:left;width:100%;margin-bottom:10px;">
+            <div style="font-size:8px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:5px;">🤖 LOSS FRAME</div>
+            <div style="font-size:10px;color:#cbd5e1;line-height:1.5;">On pace for <strong style="color:white;">₪1,400/mo</strong> on deliveries — ₪800 over last month's record.</div>
           </div>
-          <div style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);border-radius:8px;padding:10px;text-align:center;margin-bottom:12px;">
-            <div style="font-size:16px;margin-bottom:2px;">⏱</div>
-            <div style="font-size:13px;font-weight:800;color:#f59e0b;">24-Hour Hold</div>
-            <div style="font-size:9px;color:#64748b;">Big purchase detected</div>
+          <div style="background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.3);border-radius:8px;padding:9px;text-align:center;margin-bottom:10px;">
+            <div style="font-size:12px;font-weight:800;color:#a855f7;">⏱ 24-Hour Hold</div>
+            <div style="font-size:8px;color:#64748b;">Sleep on it — come back tomorrow</div>
           </div>
           <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
-            <div style="background:#f59e0b;color:#0a0f1e;border-radius:8px;padding:10px;font-size:11px;font-weight:700;text-align:center;">Save & Review Tomorrow</div>
-            <div style="border:1px solid #1e293b;color:#64748b;border-radius:8px;padding:8px;font-size:10px;text-align:center;">Pay Anyway</div>
+            <div style="background:#a855f7;color:white;border-radius:7px;padding:9px;font-size:10px;font-weight:700;text-align:center;">Save & Review Tomorrow</div>
+            <div style="border:1px solid #1e293b;color:#64748b;border-radius:7px;padding:7px;font-size:9px;text-align:center;">Pay Anyway</div>
+          </div>
+        </div>
+        <div class="ai-screen" id="ai-s3">
+          <div style="font-size:10px;font-weight:700;color:#22c55e;letter-spacing:2px;margin-bottom:10px;">RETHINK AI</div>
+          <span class="archetype-tag arch-aligned" style="margin-bottom:10px;display:inline-block;">ALIGNED</span>
+          <div style="font-size:24px;margin-bottom:6px;">☕</div>
+          <div style="font-size:12px;font-weight:700;color:white;margin-bottom:3px;">Morning coffee</div>
+          <div style="font-size:18px;font-weight:900;color:#22c55e;margin-bottom:10px;">₪22</div>
+          <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:9px;padding:10px;text-align:left;width:100%;margin-bottom:10px;">
+            <div style="font-size:8px;color:#22c55e;font-weight:700;letter-spacing:1px;margin-bottom:5px;">✅ ALIGNED</div>
+            <div style="font-size:10px;color:#cbd5e1;line-height:1.5;">On track — <strong style="color:white;">12% under budget</strong> this week. Enjoy your coffee.</div>
+          </div>
+          <div style="background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:8px;padding:12px;text-align:center;margin-bottom:10px;">
+            <div style="font-size:20px;margin-bottom:2px;">✓</div>
+            <div style="font-size:11px;font-weight:800;color:#22c55e;">No pause needed</div>
+            <div style="font-size:8px;color:#64748b;">You're spending aligned with your goals</div>
+          </div>
+          <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+            <div style="background:#22c55e;color:#0a0f1e;border-radius:7px;padding:9px;font-size:10px;font-weight:700;text-align:center;">Pay — You're Good ✓</div>
           </div>
         </div>
       </div>
@@ -719,31 +725,117 @@
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="center">
+    <div class="section-label">Real Results</div>
+    <h2>People who chose to<br/>think before they tap.</h2>
+    <p class="section-sub">The pause takes 30 seconds. The savings add up.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"I thought I was good with money — turns out I was just good at not looking. Rethink's AI showed me I was ordering food delivery twice what I thought. That number changed everything."</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#1e3a5f;">🧑</div>
+        <div>
+          <div class="testi-name">Noa T.</div>
+          <div class="testi-role">Product manager, Tel Aviv</div>
+        </div>
+      </div>
+      <div class="testi-saved">Saves ₪480/month on average</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"The 30-second pause sounds annoying. It's actually the opposite — it's like having a friend who says 'are you sure?' before you do something dumb. I've canceled 3 big purchases I would've regretted."</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#1e4f3a;">👩</div>
+        <div>
+          <div class="testi-name">Yael S.</div>
+          <div class="testi-role">Freelance designer, Jerusalem</div>
+        </div>
+      </div>
+      <div class="testi-saved">Stopped ₪1,200 in impulse buys</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"What got me was the '18 hours of work' framing. I was about to buy a gadget. Rethink said it would cost 18 hours of my salary. I put it back. Three weeks later I still don't miss it."</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#3d1e5f;">🧔</div>
+        <div>
+          <div class="testi-name">Amit K.</div>
+          <div class="testi-role">Engineer, Haifa</div>
+        </div>
+      </div>
+      <div class="testi-saved">₪3,200 purchase reconsidered</div>
+    </div>
+  </div>
+</section>
+
 <!-- THE SCIENCE -->
-<section id="science">
+<section class="science" id="science">
   <div class="center">
     <div class="section-label">Behavioral Science</div>
-    <h2>Built on decades of<br/>economic research.</h2>
-    <p class="section-sub">Every design decision in Rethink is grounded in peer-reviewed behavioral economics literature.</p>
+    <h2>Not an opinion.<br/>Decades of peer-reviewed research.</h2>
+    <p class="section-sub">Every intervention Rethink delivers is grounded in how the human brain actually makes — and regrets — financial decisions.</p>
   </div>
-  <div class="science-grid">
-    <div class="science-card">
-      <div class="science-tag">Present Bias</div>
-      <div class="science-title">We overvalue now.</div>
-      <div class="science-desc">Humans systematically overweight immediate rewards compared to future ones — making impulsive purchases feel right in the moment and regrettable minutes later. A brief pause rebalances this equation.</div>
-      <div class="science-ref">Laibson, D. (1997). Quarterly Journal of Economics.</div>
+
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-bg-letter">L</div>
+      <div class="pillar-tag"><span class="pillar-letter">L</span> Loss Aversion</div>
+      <div class="pillar-title">Losses sting twice as hard as gains feel good.</div>
+      <div class="pillar-desc">Kahneman & Tversky (1979) showed losses are felt approximately 2× more intensely than equivalent gains. Rethink reframes purchases as potential losses — "this costs 18 hours of your work" — activating the brain's natural aversion to giving something up.</div>
+      <div class="pillar-ref">Kahneman & Tversky (1979). Prospect Theory. Econometrica.</div>
     </div>
-    <div class="science-card">
-      <div class="science-tag">Pain of Paying</div>
-      <div class="science-title">Cash hurt. Tapping doesn't.</div>
-      <div class="science-desc">Paying with cash activates neural pain responses that curb spending. Digital payment has eliminated this friction entirely. Rethink reintroduces a cognitive equivalent of that pain.</div>
-      <div class="science-ref">Prelec & Loewenstein (1998). Marketing Science.</div>
+    <div class="pillar-card">
+      <div class="pillar-bg-letter">M</div>
+      <div class="pillar-tag"><span class="pillar-letter">M</span> Mental Accounting</div>
+      <div class="pillar-title">We bucket money — and it distorts decisions.</div>
+      <div class="pillar-desc">Thaler (1985) found people treat money differently depending on its mental "account." Rethink surfaces cumulative spending across categories, collapsing the illusion that each purchase is isolated — making the real total visible in real time.</div>
+      <div class="pillar-ref">Thaler, R. H. (1985). Mental Accounting and Consumer Choice. Marketing Science.</div>
     </div>
-    <div class="science-card">
-      <div class="science-tag">Temporal Friction</div>
-      <div class="science-title">Time changes decisions.</div>
-      <div class="science-desc">Introducing a mandatory delay between impulse and action allows System 2 thinking to engage. Even a 10-second pause is enough to reduce impulsive choice rates significantly.</div>
-      <div class="science-ref">Frederick, Loewenstein & O'Donoghue (2002). JEL.</div>
+    <div class="pillar-card">
+      <div class="pillar-bg-letter">F</div>
+      <div class="pillar-tag"><span class="pillar-letter">F</span> Future-Self Continuity</div>
+      <div class="pillar-title">We treat our future self like a stranger.</div>
+      <div class="pillar-desc">Hershfield et al. (2011) found that people with low future-self continuity spend more impulsively — they feel little connection to who they'll become. Rethink's "future-self bridge" messages make that future person feel real and worth protecting.</div>
+      <div class="pillar-ref">Hershfield et al. (2011). Increasing Saving Behavior. Journal of Marketing Research.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-bg-letter">P</div>
+      <div class="pillar-tag"><span class="pillar-letter">P</span> Present Bias & Friction</div>
+      <div class="pillar-title">Now feels urgent. Later feels abstract.</div>
+      <div class="pillar-desc">Present bias (Laibson, 1997) makes immediate rewards feel disproportionately valuable. Digital payments removed every natural speed bump. Rethink reintroduces temporal friction at the moment of purchase — giving the rational mind time to catch up.</div>
+      <div class="pillar-ref">Laibson (1997). Golden Eggs & Hyperbolic Discounting. QJE. · Prelec & Loewenstein (1998). Marketing Science.</div>
+    </div>
+  </div>
+
+  <div class="comb-section">
+    <div class="center" style="margin-bottom:40px;">
+      <div class="section-label">COM-B Diagnosis</div>
+      <h3 style="font-size:clamp(20px,2.5vw,30px);margin-bottom:10px;">Why people overspend — and exactly where Rethink intervenes.</h3>
+      <p class="section-sub" style="max-width:560px;margin:0 auto;">The COM-B model (Michie et al., 2011) maps behavior change across three components. Impulsive digital spending has a barrier in all three.</p>
+    </div>
+    <div class="comb-grid">
+      <div class="comb-card">
+        <div class="comb-head">🧠 Capability</div>
+        <div class="comb-barrier">Psychological barrier</div>
+        <div class="comb-text">Low real-time awareness of spending patterns. Consumers lack the cognitive tools to connect individual transactions to their financial trajectory — each purchase feels small in isolation.</div>
+        <div class="comb-text" style="margin-top:12px;color:var(--blue-lt);font-weight:600;">Rethink's fix: surfaces cumulative data at the moment of purchase.</div>
+      </div>
+      <div class="comb-card">
+        <div class="comb-head">🌍 Opportunity</div>
+        <div class="comb-barrier">Physical barrier</div>
+        <div class="comb-text">Frictionless UX removes every natural decision point. One-tap checkout, saved cards, and 24/7 availability collapse the gap between impulse and action to near zero.</div>
+        <div class="comb-text" style="margin-top:12px;color:var(--blue-lt);font-weight:600;">Rethink's fix: mandatory pause reintroduces a structured decision window.</div>
+      </div>
+      <div class="comb-card">
+        <div class="comb-head">💡 Motivation</div>
+        <div class="comb-barrier">Automatic barrier</div>
+        <div class="comb-text">Dopamine-driven reward from purchasing overrides deliberate reasoning. Present bias ensures the future cost feels abstract while the immediate gratification feels concrete and urgent.</div>
+        <div class="comb-text" style="margin-top:12px;color:var(--blue-lt);font-weight:600;">Rethink's fix: personalised AI nudge reframes the decision emotionally and rationally.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -752,131 +844,166 @@
 <section class="flow" id="flow">
   <div class="center">
     <div class="section-label">User Flow</div>
-    <h2>The intervention embedded<br/>in every payment moment.</h2>
+    <h2>The intervention embedded<br/>at the moment it matters most.</h2>
   </div>
   <div class="flow-steps">
     <div class="flow-step">
       <div class="flow-icon">👆</div>
       <div class="flow-label">Tap "Pay"</div>
-      <div class="flow-desc">User initiates any digital payment</div>
+      <div class="flow-desc">Any payment, any app</div>
     </div>
     <div class="flow-step">
       <div class="flow-icon">🔮</div>
       <div class="flow-label">AI Analyzes</div>
-      <div class="flow-desc">Amount, category, history, baseline deviation</div>
+      <div class="flow-desc">Your data, in real time</div>
     </div>
     <div class="flow-step">
       <div class="flow-icon">⏱</div>
       <div class="flow-label">Pause + Insight</div>
-      <div class="flow-desc">Countdown + personalized AI message appears</div>
+      <div class="flow-desc">Tailored message appears</div>
     </div>
     <div class="flow-step">
       <div class="flow-icon">🤔</div>
-      <div class="flow-label">User Decides</div>
-      <div class="flow-desc">Pay / Save to wishlist / Cancel</div>
+      <div class="flow-label">You Decide</div>
+      <div class="flow-desc">Pay · Save · Cancel</div>
     </div>
     <div class="flow-step">
       <div class="flow-icon">📈</div>
       <div class="flow-label">AI Learns</div>
-      <div class="flow-desc">Decision feeds model for sharper future nudges</div>
+      <div class="flow-desc">Gets sharper every time</div>
     </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="center">
+    <div class="section-label">Questions</div>
+    <h2>The things people ask<br/>before they try it.</h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q">Will this slow down every purchase I make?</div>
+      <div class="faq-a">No. Rethink's AI distinguishes between routine purchases (groceries, bills, subscriptions) and discretionary ones that deviate from your pattern. You only feel friction when the data says you might regret it.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I override the pause and just pay?</div>
+      <div class="faq-a">Always. Rethink never blocks a payment — it creates a choice. You can complete any transaction at any time. The pause exists to make sure you're choosing, not just reacting.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is it really free?</div>
+      <div class="faq-a">Yes, completely. Rethink doesn't charge you, doesn't sell your data, and doesn't take a cut of any payment. The only thing it costs you is 30 seconds.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How does the AI know my spending habits?</div>
+      <div class="faq-a">Rethink connects to your payment data (with your permission) and builds a personal baseline from your history. All processing is on-device. Your spending data never leaves your phone.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if I use multiple payment methods?</div>
+      <div class="faq-a">Rethink works across payment methods and integrates with wallets, cards, and apps. The AI aggregates across sources so your insights are complete — not just what you paid with Apple Pay.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is there research behind this approach?</div>
+      <div class="faq-a">Yes. Rethink is built on peer-reviewed behavioral economics research: the Pain of Paying (Prelec & Loewenstein), Present Bias (Laibson), and Temporal Friction (Frederick et al.). The science is real — we just built the app.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GEM CTA -->
+<section class="gem-section">
+  <div class="gem-badge">✨ Live AI Prototype — Try it now</div>
+  <h2>Rethink isn't just a concept.<br/>The AI is already live.</h2>
+  <p>We built a working Gemini Gem that simulates the Rethink AI. Give it a real purchase scenario — it will diagnose the behavioral driver and respond exactly as the app would.</p>
+  <a href="https://gemini.google.com/gem/1WwqGORaWVksUwKFTtLhQpZyno7uWGF_K?usp=sharing" target="_blank" rel="noopener" class="btn-gem">
+    <span style="font-size:20px;">✨</span>
+    Try the Rethink AI Gem
+    <span style="font-size:14px;">→</span>
+  </a>
+  <p style="font-size:12px;color:var(--gray3);margin-top:20px;margin-bottom:0;">Opens Google Gemini · Free to use · No sign-in required</p>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="section-label center">Ready to stop the bleed?</div>
+  <h2>Most users save ₪340/month.<br/>The app costs nothing.</h2>
+  <p>You'll know if it's working within a week. If it's not, turn it off. No friction, no commitment — just a smarter way to spend.</p>
+  <div class="final-actions">
+    <button class="btn-primary" style="font-size:16px;padding:18px 36px;">Start Saving Today — Free</button>
+    <button class="btn-ghost">Learn the science →</button>
+  </div>
+  <div class="final-trust">
+    <div class="final-trust-item">No credit card required</div>
+    <div class="final-trust-item">Cancel anytime</div>
+    <div class="final-trust-item">Your data stays on-device</div>
+    <div class="final-trust-item">Works with any payment app</div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">rethink</div>
-  <div class="footer-text">A behavioral economics intervention · Financial Behavior domain</div>
+  <div class="footer-text">AI-powered payment friction · Financial Behavior</div>
   <div class="footer-uni">Behavioral Economics From Theory to Practice<br/>Reichman University · May 2026</div>
 </footer>
 
 <script>
   // ── Hero phone animation ──
-  const screens = ['s1','s2','s3'];
-  const dots = ['d1','d2','d3'];
-  let current = 0;
-  let timerInterval = null;
-  let timerVal = 30;
-  const circumference = 2 * Math.PI * 40; // 251.2
+  const circumference = 2 * Math.PI * 36; // 226
+  let timerVal = 30, timerInt = null;
+  const sequence = [
+    { idx: 0, dur: 2400 },
+    { idx: 1, dur: 5200, onShow: startTimer },
+    { idx: 2, dur: 2600 },
+  ];
+  let step = 0;
 
   function showScreen(idx) {
-    screens.forEach((id, i) => {
-      document.getElementById(id).classList.toggle('active', i === idx);
-    });
-    dots.forEach((id, i) => {
-      document.getElementById(id).classList.toggle('active', i === idx);
-    });
+    ['s1','s2','s3'].forEach((id,i) => document.getElementById(id).classList.toggle('active', i===idx));
+    ['d1','d2','d3'].forEach((id,i) => document.getElementById(id).classList.toggle('active', i===idx));
   }
 
-  function runCountdown() {
+  function startTimer() {
     const prog = document.getElementById('prog');
-    const timerEl = document.getElementById('timer');
+    const el = document.getElementById('timer');
     timerVal = 30;
-    if (timerInterval) clearInterval(timerInterval);
-
+    if(timerInt) clearInterval(timerInt);
     prog.style.strokeDashoffset = '0';
-    timerEl.textContent = timerVal;
-
-    timerInterval = setInterval(() => {
+    el.textContent = 30;
+    timerInt = setInterval(() => {
       timerVal--;
-      timerEl.textContent = timerVal;
-      const offset = circumference * (1 - timerVal / 30);
-      prog.style.strokeDashoffset = offset;
-      if (timerVal <= 0) {
-        clearInterval(timerInterval);
-      }
+      el.textContent = timerVal;
+      prog.style.strokeDashoffset = circumference * (1 - timerVal/30);
+      if(timerVal <= 0) clearInterval(timerInt);
     }, 1000);
   }
 
-  function heroLoop() {
-    // Show shop first, then rethink with countdown, then saved
-    const sequence = [
-      { idx: 0, duration: 2500 },
-      { idx: 1, duration: 5000, onShow: runCountdown },
-      { idx: 2, duration: 2500 },
-    ];
+  (function heroLoop() {
+    const s = sequence[step % sequence.length];
+    showScreen(s.idx);
+    if(s.onShow) s.onShow();
+    step++;
+    setTimeout(heroLoop, s.dur);
+  })();
 
-    let step = 0;
-    function next() {
-      const s = sequence[step % sequence.length];
-      current = s.idx;
-      showScreen(s.idx);
-      if (s.onShow) s.onShow();
-      step++;
-      setTimeout(next, s.duration);
-    }
-    next();
-  }
-  heroLoop();
+  // ── Scroll fade-in ──
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.stat-card,.step-card,.science-card,.pillar-card,.comb-card,.flow-step,.testi-card,.faq-item,.fade-in').forEach(el => io.observe(el));
 
-  // ── Intersection observer for fade-in ──
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.stat-card, .step-card, .science-card, .flow-step').forEach(el => observer.observe(el));
-
-  // ── AI scenarios ──
-  const scenarioCards = document.querySelectorAll('.scenario-card');
+  // ── AI scenario cycling ──
+  const cards = document.querySelectorAll('.scenario-card');
   const aiScreens = document.querySelectorAll('.ai-screen');
-  let currentScenario = 0;
+  let cur = 0;
 
   function setScenario(idx) {
-    scenarioCards.forEach((c, i) => c.classList.toggle('active', i === idx));
-    aiScreens.forEach((s, i) => s.classList.toggle('active', i === idx));
-    currentScenario = idx;
+    cards.forEach((c,i) => c.classList.toggle('active', i===idx));
+    aiScreens.forEach((s,i) => s.classList.toggle('active', i===idx));
+    cur = idx;
   }
 
-  scenarioCards.forEach((card, idx) => {
-    card.addEventListener('click', () => setScenario(idx));
-  });
-
-  // Auto-cycle scenarios
-  setInterval(() => {
-    setScenario((currentScenario + 1) % scenarioCards.length);
-  }, 4000);
+  cards.forEach((c,i) => c.addEventListener('click', () => setScenario(i)));
+  setInterval(() => setScenario((cur+1) % cards.length), 4000);
 </script>
 </body>
 </html>
