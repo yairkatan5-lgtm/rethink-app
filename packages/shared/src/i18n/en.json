@@ -1,0 +1,44 @@
+{
+  "friction": {
+    "brand": "RETHINK",
+    "title": "Before you pay, one moment.",
+    "sub": "Take a beat. Reconsider this purchase.",
+    "secondsRemaining": "seconds remaining",
+    "minutesRemaining": "minutes remaining",
+    "buyNow": "Complete Purchase",
+    "buyAfterPause": "Buy Anyway",
+    "save": "Save to Wishlist · decide later",
+    "cancel": "Cancel · I don't need this",
+    "alternativeChip": "This buys you",
+    "saveOk": "Saved.",
+    "saveSub": "We'll ask you in 24 hours: still want it?",
+    "savedAmount": "not spent impulsively",
+    "savedBadge": "+1 mindful decision"
+  },
+  "onboarding": {
+    "welcome": "Welcome to Rethink",
+    "tagline": "A pause before you spend.",
+    "start": "Let's set you up",
+    "next": "Next",
+    "back": "Back",
+    "finish": "Start using Rethink",
+    "language": "Language",
+    "currency": "Currency",
+    "monthlyBudget": "Monthly discretionary budget",
+    "monthlyBudgetHint": "How much do you set aside for non-essentials each month?",
+    "archetypeIntro": "Which best describes you?",
+    "archetypeImpulsive": "I see something nice, I buy it.",
+    "archetypeEmotional": "I shop when I'm stressed, bored, or tired.",
+    "archetypeCumulative": "Lots of small things — they add up.",
+    "archetypeAligned": "I usually plan my purchases."
+  },
+  "popup": {
+    "noOnboarding": "Set up Rethink",
+    "settings": "Settings",
+    "wishlist": "Wishlist",
+    "stats": "This month",
+    "saved": "Saved",
+    "cancelled": "Cancelled",
+    "decisions": "Decisions"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "friction": {
+    "brand": "RETHINK",
+    "title": "רגע לפני שאתה משלם.",
+    "sub": "תיקח נשימה. תחשוב שוב על הקנייה.",
+    "secondsRemaining": "שניות נותרו",
+    "minutesRemaining": "דקות נותרו",
+    "buyNow": "השלם רכישה",
+    "buyAfterPause": "קנה בכל זאת",
+    "save": "שמור לרשימת המשאלות · אחליט אחר כך",
+    "cancel": "בטל · אני לא צריך את זה",
+    "alternativeChip": "הסכום הזה שווה",
+    "saveOk": "נשמר.",
+    "saveSub": "נחזיר אליך את ההחלטה בעוד 24 שעות. עדיין תרצה את זה?",
+    "savedAmount": "לא הוצא באימפולס",
+    "savedBadge": "+1 החלטה מודעת"
+  },
+  "onboarding": {
+    "welcome": "ברוך הבא ל-Rethink",
+    "tagline": "רגע של עצירה לפני שאתה מוציא.",
+    "start": "בוא נגדיר לך",
+    "next": "הבא",
+    "back": "חזור",
+    "finish": "התחל להשתמש ב-Rethink",
+    "language": "שפה",
+    "currency": "מטבע",
+    "monthlyBudget": "תקציב חופשי חודשי",
+    "monthlyBudgetHint": "כמה אתה מקצה לדברים לא הכרחיים בחודש?",
+    "archetypeIntro": "מה הכי מתאר אותך?",
+    "archetypeImpulsive": "אני רואה משהו מגניב, אני קונה.",
+    "archetypeEmotional": "אני קונה כשאני בלחץ, משועמם או עייף.",
+    "archetypeCumulative": "המון דברים קטנים, שבסוף מצטברים.",
+    "archetypeAligned": "אני בדרך כלל מתכנן את הקניות שלי."
+  },
+  "popup": {
+    "noOnboarding": "הגדר את Rethink",
+    "settings": "הגדרות",
+    "wishlist": "רשימת משאלות",
+    "stats": "החודש הזה",
+    "saved": "נשמרו",
+    "cancelled": "בוטלו",
+    "decisions": "החלטות"
+  }
+}

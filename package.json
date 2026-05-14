@@ -1,0 +1,13 @@
+{
+  "name": "rethink-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Rethink — friction-injection for impulsive purchases",
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "ext:dev": "pnpm --filter @rethink/extension dev",
+    "ext:build": "pnpm --filter @rethink/extension build",
+    "ext:zip": "pnpm --filter @rethink/extension zip",
+    "ext:build:firefox": "pnpm --filter @rethink/extension build:firefox"
+  }
+}
