@@ -187,6 +187,7 @@ const doc = new Document({
         new Paragraph({ spacing: { before: 160, after: 80 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Students:", bold: true, size: pt(12), font: "Times New Roman" })] }),
         new Paragraph({ spacing: { before: 0, after: 80 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Yoav Aviram  |  ID: 316522721", size: pt(12), font: "Times New Roman" })] }),
         new Paragraph({ spacing: { before: 0, after: 80 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Yair Katan  |  ID: 313559692", size: pt(12), font: "Times New Roman" })] }),
+        new Paragraph({ spacing: { before: 0, after: 80 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Meital Segev  |  ID: 318545282", size: pt(12), font: "Times New Roman" })] }),
         spacer(),
         new Paragraph({ spacing: { before: 160, after: 0 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: "May 2026", size: pt(12), font: "Times New Roman" })] }),
         new Paragraph({ children: [new PageBreak()] }),
@@ -341,7 +342,7 @@ const doc = new Document({
 });
 
 Packer.toBuffer(doc).then(buffer => {
-  fs.writeFileSync("C:\\Users\\יאיר\\Downloads\\יאיר אישי\\AGENT\\rethink-app\\Rethink_PRD_316522721_313559692.docx", buffer);
+  fs.writeFileSync("C:\\Users\\יאיר\\Downloads\\יאיר אישי\\AGENT\\rethink-app\\Rethink_PRD_316522721_313559692_318545282.docx", buffer);
   console.log("Done: Rethink_PRD.docx created successfully");
 }).catch(err => {
   console.error("Error:", err);
